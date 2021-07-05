@@ -201,8 +201,6 @@ void EAppControl::显示控件信息(ControlType_t type, unsigned int propertyAddr, in
 		return;
 	}
 
-
-
 	unsigned char* pUnitDataPtr = EAppControl::GetUnitDataPtr(&tmpBuf[0]);
 	int UnitDataSize = (&tmpBuf[0] - pUnitDataPtr) + propertySize;
 	if (!UnitDataSize) {

@@ -388,20 +388,20 @@ bool EDecompilerEngine::ParseKrnlInterface(ea_t lpKrnlEntry)
 
 	til_t* idati = (til_t*)get_idati();
 
-	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MReportError, "错误回调");
-	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MCallDllCmd, "DLL命令");
-	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MCallLibCmd, "三方支持库命令");
-	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MCallKrnlLibCmd, "核心支持库命令");
+	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MReportError, "错误回调", SN_FORCE);
+	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MCallDllCmd, "DLL命令", SN_FORCE);
+	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MCallLibCmd, "三方支持库命令", SN_FORCE);
+	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MCallKrnlLibCmd, "核心支持库命令", SN_FORCE);
 
-	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MReadProperty, "读取组件属性");
-	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MWriteProperty, "设置组件属性");
-	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MMalloc, "分配内存");
-	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MRealloc, "重新分配内存");
-	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MFree, "释放内存");
-	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MExitProcess, "结束");
-	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MMessageLoop, "窗口消息循环");
-	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MLoadBeginWin, "载入启动窗口");
-	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MOtherHelp, "辅助函数");
+	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MReadProperty, "读取组件属性", SN_FORCE);
+	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MWriteProperty, "设置组件属性", SN_FORCE);
+	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MMalloc, "分配内存", SN_FORCE);
+	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MRealloc, "重新分配内存", SN_FORCE);
+	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MFree, "释放内存", SN_FORCE);
+	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MExitProcess, "结束", SN_FORCE);
+	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MMessageLoop, "窗口消息循环", SN_FORCE);
+	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MLoadBeginWin, "载入启动窗口", SN_FORCE);
+	setFuncName(m_eAppInfo.m_KrnlJmp.Jmp_MOtherHelp, "辅助函数", SN_FORCE);
 
 	apply_cdecl(idati, m_eAppInfo.m_KrnlJmp.Jmp_MCallDllCmd, "unsigned long long __usercall CallDllCmd@<eax:edx>(unsigned int index@<eax>,...);");
 	apply_cdecl(idati, m_eAppInfo.m_KrnlJmp.Jmp_MCallLibCmd, "unsigned long long __usercall CallLibCmd@<eax:edx>(unsigned int libFunc@<ebx>, int argCount, ...);");

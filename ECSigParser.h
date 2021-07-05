@@ -32,7 +32,8 @@ private:
 	static qstring GetSig_LogicInst(insn_t& ins);
 	static qstring GetSig_Imul(insn_t& ins);
 	static qstring GetSig_Pop(insn_t& ins);
-	static qstring GetSig_Call(insn_t& ins, qvector<qstring>& vec_saveSig);
+	static qstring GetSig_LongJmp(insn_t& ins);
+	static qstring GetSig_Call(insn_t& ins, qvector<qstring>& vec_saveSig, bool& out_bSkipState);
 	static qstring GetSig_Nop(insn_t& ins);
 	//检查是否为易语言标准函数，参数为函数起始地址
 	static bool IsEStandardFunction(ea_t startAddr);

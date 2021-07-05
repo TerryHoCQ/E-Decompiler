@@ -21,6 +21,14 @@ uint32 ECSigParser::m_UserResourceEndAddr = 0x0;
 std::map<ea_t, qstring> ECSigParser::mSave_SubFunc;
 bool ECSigParser::bFuzzySig = false;
 
+bool isJumpInst(uint16 itype)
+{
+	if (itype >= NN_ja && itype <= NN_jmpshort) {
+		return true;
+	}
+	return false;
+}
+
 const char* GetDataType(uint8 n)
 {
 	switch (n)
@@ -122,6 +130,21 @@ qstring GetInsHex(insn_t& ins)
 	return ret;
 }
 
+qstring ECSigParser::GetSig_LongJmp(insn_t& ins)
+{
+	qstring ret;
+	unsigned char* pData = SectionManager::LinearAddrToVirtualAddr(ins.ip);
+
+	//长跳转统一模糊处理
+	if (ins.size >= 5) {
+		ret.append(UCharToStr(pData[0]));
+		return ret;
+	}
+
+	ret = GetInsHex(ins);
+	return ret;
+}
+
 bool ECSigParser::IsUserResourceOffset(uint32 offset)
 {
 	int32 distance = (uint32)offset;
@@ -193,22 +216,33 @@ qstring ECSigParser::GetSig_Nop(insn_t& ins)
 	return ret;
 }
 
-qstring ECSigParser::GetSig_Call(insn_t& ins, qvector<qstring>& vec_saveSig)
+qstring ECSigParser::GetSig_Call(insn_t& ins, qvector<qstring>& vec_saveSig,bool& out_bSkipState)
 {
 	qstring ret;
 	if (ins.ops[0].type == o_near) {
 		//错误回调函数
 		if (ins.ops[0].addr == m_KrnlJmp.Jmp_MReportError) {
 			ea_t lastInsAddr = ins.ip;
-			for (unsigned int n = 0; n < 3; ++n) {
-				insn_t LastIns;
-				lastInsAddr = decode_prev_insn(&LastIns, lastInsAddr);
-				if (LastIns.itype == NN_push && LastIns.ops[0].type == o_imm) {
-					vec_saveSig[vec_saveSig.size() - 1 - n] = "68????????";
-				}
+			out_bSkipState = true;
+			insn_t LastIns;
+			lastInsAddr = decode_prev_insn(&LastIns, lastInsAddr);
+			if (LastIns.itype == NN_push && LastIns.ops[0].type == o_imm) {
+				vec_saveSig[vec_saveSig.size() - 1] = "";
 			}
-			ret = getUTF8String("<错误回调>");
-			return ret;
+			lastInsAddr = decode_prev_insn(&LastIns, lastInsAddr);
+			if (LastIns.itype == NN_push && LastIns.ops[0].type == o_imm) {
+				vec_saveSig[vec_saveSig.size() - 2] = "";
+			}
+			else if (isJumpInst(LastIns.itype)) {
+				vec_saveSig[vec_saveSig.size() - 2] = "";
+				return getUTF8String("<错误回调>");
+			}
+			lastInsAddr = decode_prev_insn(&LastIns, lastInsAddr);
+			if (LastIns.itype == NN_push && LastIns.ops[0].type == o_imm) {
+				vec_saveSig[vec_saveSig.size() - 3] = "";
+				vec_saveSig[vec_saveSig.size() - 4] = "";
+			}
+			return getUTF8String("<错误回调>");
 		}
 		//调用DLL命令
 		if (ins.ops[0].addr == m_KrnlJmp.Jmp_MCallDllCmd) {
@@ -2187,6 +2221,7 @@ qstring ECSigParser::GetFunctionMD5(ea_t FuncStartAddr)
 
 	ea_t startAddr = pFunc->start_ea;
 	qvector<qstring> vec_SaveSig;
+	bool bSkipNextIns = false;
 	do
 	{
 		qstring tmpSig;
@@ -2212,6 +2247,11 @@ qstring ECSigParser::GetFunctionMD5(ea_t FuncStartAddr)
 			int a = 0;
 		}
 #endif
+		if (bSkipNextIns) {
+			startAddr = startAddr + CurrentIns.size;
+			bSkipNextIns = false;
+			continue;
+		}
 		switch (CurrentIns.itype)
 		{
 		case NN_ja:
@@ -2247,11 +2287,13 @@ qstring ECSigParser::GetFunctionMD5(ea_t FuncStartAddr)
 		case NN_jpo:
 		case NN_js:
 		case NN_jz:
-		case NN_jmp:
 		case NN_jmpfi:
 		case NN_jmpni:
 		case NN_jmpshort:
 			tmpSig = GetInsHex(CurrentIns);
+			break;
+		case NN_jmp:
+			tmpSig = GetSig_LongJmp(CurrentIns);
 			break;
 		case NN_add:
 		case NN_cmp:
@@ -2282,7 +2324,7 @@ qstring ECSigParser::GetFunctionMD5(ea_t FuncStartAddr)
 			tmpSig = GetSig_FlexSingleInst(CurrentIns);
 			break;
 		case NN_call:
-			tmpSig = GetSig_Call(CurrentIns, vec_SaveSig);
+			tmpSig = GetSig_Call(CurrentIns, vec_SaveSig, bSkipNextIns);
 			break;
 		//nop指令的处理是个例外,这个是预留给易语言的花指令的
 		case NN_nop:
@@ -2385,7 +2427,7 @@ qstring ECSigParser::GetFunctionMD5(ea_t FuncStartAddr)
 
 #ifdef _DEBUG
 	if (!bFuzzySig) {
-		//msg("[%a]:%s\n", FuncStartAddr, STRING_RESULT.c_str());
+		msg("[%a]:%s\n", FuncStartAddr, STRING_RESULT.c_str());
 	}
 #endif // _DEBUG
 	
