@@ -127,7 +127,7 @@ bool ESigScanner::ScanLibFunction(ea_t lpLibStartAddr, uint32 dwLibCount)
 			ea_t funcAddr = pFuncBuf[nFuncIndex];
 
 #ifdef _DEBUG
-			if (funcAddr == 0x5454D0) {
+			if (funcAddr == 0x0049B790) {
 				int a = 0;
 		}
 #endif

@@ -23,6 +23,11 @@ bool FastMatch_CmpApi(unsigned char* pSrc, qstring IATEAT)
 		EATCom = IATEAT.substr(IATEAT.find('.') + 1);
 	}
 
+	size_t nDllPos = IATCom.find('.');
+	if (nDllPos != qstring::npos) {
+		IATCom = IATCom.substr(nDllPos + 1);
+	}
+
 	ea_t oaddr = ReadUInt(pSrc);
 	qstring funcName = get_name(oaddr);
 	if (funcName.find("__imp_") == 0) {

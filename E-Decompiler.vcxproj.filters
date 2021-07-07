@@ -126,6 +126,12 @@
     <ClCompile Include="EAppControl\krnl_ChkListBox.cpp">
       <Filter>头文件\EAppControl</Filter>
     </ClCompile>
+    <ClCompile Include="EAppControl\krnl_HScrollBar.cpp">
+      <Filter>头文件\EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_VScrollBar.cpp">
+      <Filter>头文件\EAppControl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SectionManager.h">
@@ -229,6 +235,12 @@
       <Filter>头文件\EAppControl</Filter>
     </ClInclude>
     <ClInclude Include="EAppControl\krnl_ChkListBox.h">
+      <Filter>头文件\EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_HScrollBar.h">
+      <Filter>头文件\EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_VScrollBar.h">
       <Filter>头文件\EAppControl</Filter>
     </ClInclude>
   </ItemGroup>
