@@ -15,6 +15,9 @@
 #include "krnl_ChkListBox.h"
 #include "krnl_HScrollBar.h"
 #include "krnl_VScrollBar.h"
+#include "krnl_ProcessBar.h"
+#include "krnl_SliderBar.h"
+
 
 class krnl_window gkrnl_window;
 class krnl_EditBox gkrnl_EditBox;
@@ -32,6 +35,8 @@ class krnl_ListBox gkrnl_ListBox;
 class krnl_ChkListBox gkrnl_ChkListBox;
 class krnl_HScrollBar gkrnl_HScrollBar;
 class krnl_VScrollBar gkrnl_VScrollBar;
+class krnl_ProcessBar gkrnl_ProcessBar;
+class krnl_SliderBar gkrnl_SliderBar;
 
 QHash<ControlType_t, EAppControl*> g_classMap = {
 	{krnl_window, &gkrnl_window},
@@ -49,7 +54,9 @@ QHash<ControlType_t, EAppControl*> g_classMap = {
 	{krnl_ListBox,&gkrnl_ListBox},
 	{krnl_ChkListBox,&gkrnl_ChkListBox},
 	{krnl_HScrollBar,&gkrnl_HScrollBar},
-	{krnl_VScrollBar,&gkrnl_VScrollBar}
+	{krnl_VScrollBar,&gkrnl_VScrollBar},
+	{krnl_ProcessBar,&gkrnl_ProcessBar},
+	{krnl_SliderBar,&gkrnl_SliderBar}
 };
 
 EAppControl* EAppControlFactory::getEAppControl(ControlType_t type)
