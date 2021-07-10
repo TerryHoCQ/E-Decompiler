@@ -10,5 +10,5 @@ protected:
 	qstring 取事件名称(int eventIndex);
 	QString 取图标资源路径();
 private:
-	QStringList 取边框列表();
+	static QStringList 取边框列表();
 };

@@ -10,7 +10,7 @@ protected:
 	qstring 取事件名称(int eventIndex);
 	QString 取图标资源路径();
 private:
-	QStringList 取外形列表();
-	QStringList 取线条效果列表();
-	QStringList 取线型列表();
+	static QStringList 取外形列表();
+	static QStringList 取线条效果列表();
+	static QStringList 取线型列表();
 };

@@ -133,6 +133,7 @@
     <ClCompile Include="EAppControl\krnl_RadioBox.cpp" />
     <ClCompile Include="EAppControl\krnl_ShapeBox.cpp" />
     <ClCompile Include="EAppControl\krnl_SliderBar.cpp" />
+    <ClCompile Include="EAppControl\krnl_Tab.cpp" />
     <ClCompile Include="EAppControl\krnl_Timer.cpp" />
     <ClCompile Include="EAppControl\krnl_VScrollBar.cpp" />
     <ClCompile Include="EAppControl\krnl_window.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="EAppControl\krnl_RadioBox.h" />
     <ClInclude Include="EAppControl\krnl_ShapeBox.h" />
     <ClInclude Include="EAppControl\krnl_SliderBar.h" />
+    <ClInclude Include="EAppControl\krnl_Tab.h" />
     <ClInclude Include="EAppControl\krnl_Timer.h" />
     <ClInclude Include="EAppControl\krnl_VScrollBar.h" />
     <ClInclude Include="EAppControl\krnl_window.h" />

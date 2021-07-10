@@ -207,6 +207,16 @@ qvector<qstring> CDR_ReadVecString(unsigned char*& currentPoint)
 	return ret;
 }
 
+qvector<unsigned int> CDR_ReadVecInt(unsigned char*& currentPoint)
+{
+	qvector<unsigned int> ret;
+	int len = CDR_ReadInt(currentPoint);
+	for (int n = 0; n < len / 4; ++n) {
+		ret.push_back(CDR_ReadUInt(currentPoint));
+	}
+	return ret;
+}
+
 qstring CDR_ReadCString(unsigned char*& currentPoint)
 {
 	qstring ret;
@@ -251,3 +261,4 @@ void setFuncName(ea_t addr, const char* funcName, int flags)
 		set_name(addr, newName.c_str(), SN_NOWARN | flags);
 	}
 }
+

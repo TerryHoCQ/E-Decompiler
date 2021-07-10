@@ -11,9 +11,27 @@ struct ChkListBox_UnitData
 	unsigned int 单选;
 	int 现行选中项;
 	qvector<unsigned char> 字体;
-	qvector<unsigned char> 项目数值;
+	qvector<unsigned int> 项目数值;
 	qvector<qstring> 列表项目;
 };
+
+QStringList krnl_ChkListBox::QStringListFromVec(qvector<qstring>& vec_str)
+{
+	QStringList ret;
+	for (unsigned int n = 0; n < vec_str.size(); ++n) {
+		ret.push_back(QString::fromLocal8Bit(vec_str[n].c_str()));
+	}
+	return ret;
+}
+
+QStringList krnl_ChkListBox::QStringListFromVec(qvector<unsigned int>& vec_str)
+{
+	QStringList ret;
+	for (unsigned int n = 0; n < vec_str.size(); ++n) {
+		ret.push_back(QString::number(vec_str[n]));
+	}
+	return ret;
+}
 
 QStringList krnl_ChkListBox::取边框列表()
 {
@@ -54,11 +72,7 @@ void krnl_ChkListBox::反序列化控件附加属性(unsigned char* pUnitDataPtr, QHash<QS
 	tmpData.现行选中项 = CDR_ReadInt(pUnitDataPtr);
 
 	tmpData.字体 = CDR_ReadCFreqMem(pUnitDataPtr);
-	QStringList list_项目数值;
-	int len = CDR_ReadInt(pUnitDataPtr);
-	for (int n = 0; n < len / 4; ++n) {
-		list_项目数值.push_back(QString::number(CDR_ReadUInt(pUnitDataPtr)));
-	}
+	tmpData.项目数值 = CDR_ReadVecInt(pUnitDataPtr);
 
 	tmpData.列表项目 = CDR_ReadVecString(pUnitDataPtr);
 
@@ -72,12 +86,8 @@ void krnl_ChkListBox::反序列化控件附加属性(unsigned char* pUnitDataPtr, QHash<QS
 	if (tmpData.字体.size()) {
 		out_data[QStringLiteral("字体")] = QByteArray((char*)&tmpData.字体[0], tmpData.字体.size());
 	}
-	out_data[QStringLiteral("项目数值")] = list_项目数值;
-	QStringList list_列表项目;
-	for (unsigned int n = 0; n < tmpData.列表项目.size(); ++n) {
-		list_列表项目.push_back(QString::fromLocal8Bit(tmpData.列表项目[n].c_str()));
-	}
-	out_data[QStringLiteral("列表项目")] = list_列表项目;
+	out_data[QStringLiteral("项目数值")] = QStringListFromVec(tmpData.项目数值);
+	out_data[QStringLiteral("列表项目")] = QStringListFromVec(tmpData.列表项目);
 	return;
 }
 

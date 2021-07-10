@@ -10,10 +10,10 @@ protected:
 	qstring 取事件名称(int eventIndex);
 	QString 取图标资源路径();
 private:
-	QStringList 取边框列表();
-	QStringList 取滚动条列表();
-	QStringList 取对齐方式列表();
-	QStringList 取输入方式列表();
-	QStringList 取转换方式列表();
-	QStringList 取调节器方式列表();
+	static QStringList 取边框列表();
+	static QStringList 取滚动条列表();
+	static QStringList 取对齐方式列表();
+	static QStringList 取输入方式列表();
+	static QStringList 取转换方式列表();
+	static QStringList 取调节器方式列表();
 };

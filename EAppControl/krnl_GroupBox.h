@@ -10,5 +10,5 @@ protected:
 	qstring 取事件名称(int eventIndex);
 	QString 取图标资源路径();
 private:
-	QStringList krnl_GroupBox::取对齐方式列表();
+	static QStringList 取对齐方式列表();
 };
