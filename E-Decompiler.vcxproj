@@ -116,6 +116,7 @@
     <ClCompile Include="ControlInfoWidget.cpp" />
     <ClCompile Include="EAppControl\EAppControl.cpp" />
     <ClCompile Include="EAppControl\EAppControlFactory.cpp" />
+    <ClCompile Include="EAppControl\krnl_AnimateBox.cpp" />
     <ClCompile Include="EAppControl\krnl_Button.cpp" />
     <ClCompile Include="EAppControl\krnl_CheckBox.cpp" />
     <ClCompile Include="EAppControl\krnl_ChkListBox.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="common\public.h" />
     <ClInclude Include="EAppControl\EAppControl.h" />
     <ClInclude Include="EAppControl\EAppControlFactory.h" />
+    <ClInclude Include="EAppControl\krnl_AnimateBox.h" />
     <ClInclude Include="EAppControl\krnl_Button.h" />
     <ClInclude Include="EAppControl\krnl_CheckBox.h" />
     <ClInclude Include="EAppControl\krnl_ChkListBox.h" />

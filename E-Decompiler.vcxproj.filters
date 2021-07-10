@@ -141,6 +141,9 @@
     <ClCompile Include="EAppControl\krnl_Tab.cpp">
       <Filter>头文件\EAppControl</Filter>
     </ClCompile>
+    <ClCompile Include="EAppControl\krnl_AnimateBox.cpp">
+      <Filter>头文件\EAppControl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SectionManager.h">
@@ -259,6 +262,9 @@
       <Filter>头文件\EAppControl</Filter>
     </ClInclude>
     <ClInclude Include="EAppControl\krnl_Tab.h">
+      <Filter>头文件\EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_AnimateBox.h">
       <Filter>头文件\EAppControl</Filter>
     </ClInclude>
   </ItemGroup>
