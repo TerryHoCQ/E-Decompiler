@@ -38,8 +38,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>5.6.3_msvc2015_64</QtInstall>
-    <QtModules>
-    </QtModules>
+    <QtModules>core;gui;widgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
@@ -65,7 +64,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>C:\MyLib\idasdk75\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>QT_NAMESPACE=QT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>QT_NAMESPACE=QT;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>C:\MyLib\idasdk75\lib\x64_win_vc_32;C:\MyLib\idasdk75\lib\x64_win_qt;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -75,7 +75,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>C:\MyLib\idasdk75\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>QT_NAMESPACE=QT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>QT_NAMESPACE=QT;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BufferSecurityCheck>false</BufferSecurityCheck>
     </ClCompile>
     <Link>
@@ -138,15 +138,98 @@
     <ClCompile Include="EAppControl\krnl_Timer.cpp" />
     <ClCompile Include="EAppControl\krnl_VScrollBar.cpp" />
     <ClCompile Include="EAppControl\krnl_window.cpp" />
+    <ClCompile Include="EazyDecompiler.cpp" />
+    <ClCompile Include="IDAArchitecture.cpp" />
     <ClCompile Include="ECSigParser.cpp" />
     <ClCompile Include="EDecompiler.cpp" />
     <ClCompile Include="ESigScanner.cpp" />
+    <ClCompile Include="Ghidra\action.cc" />
+    <ClCompile Include="Ghidra\address.cc" />
+    <ClCompile Include="Ghidra\architecture.cc" />
+    <ClCompile Include="Ghidra\block.cc" />
+    <ClCompile Include="Ghidra\blockaction.cc" />
+    <ClCompile Include="Ghidra\callgraph.cc" />
+    <ClCompile Include="Ghidra\capability.cc" />
+    <ClCompile Include="Ghidra\cast.cc" />
+    <ClCompile Include="Ghidra\comment.cc" />
+    <ClCompile Include="Ghidra\condexe.cc" />
+    <ClCompile Include="Ghidra\context.cc" />
+    <ClCompile Include="Ghidra\coreaction.cc" />
+    <ClCompile Include="Ghidra\cover.cc" />
+    <ClCompile Include="Ghidra\cpool.cc" />
+    <ClCompile Include="Ghidra\crc32.cc" />
+    <ClCompile Include="Ghidra\database.cc" />
+    <ClCompile Include="Ghidra\double.cc" />
+    <ClCompile Include="Ghidra\dynamic.cc" />
+    <ClCompile Include="Ghidra\emulate.cc" />
+    <ClCompile Include="Ghidra\emulateutil.cc" />
+    <ClCompile Include="Ghidra\filemanage.cc" />
+    <ClCompile Include="Ghidra\float.cc" />
+    <ClCompile Include="Ghidra\flow.cc" />
+    <ClCompile Include="Ghidra\fspec.cc" />
+    <ClCompile Include="Ghidra\funcdata.cc" />
+    <ClCompile Include="Ghidra\funcdata_block.cc" />
+    <ClCompile Include="Ghidra\funcdata_op.cc" />
+    <ClCompile Include="Ghidra\funcdata_varnode.cc" />
+    <ClCompile Include="Ghidra\globalcontext.cc" />
+    <ClCompile Include="Ghidra\grammar.cc" />
+    <ClCompile Include="Ghidra\graph.cc" />
+    <ClCompile Include="Ghidra\heritage.cc" />
+    <ClCompile Include="Ghidra\inject_sleigh.cc" />
+    <ClCompile Include="Ghidra\jumptable.cc" />
+    <ClCompile Include="Ghidra\loadimage.cc" />
+    <ClCompile Include="Ghidra\loadimage_xml.cc" />
+    <ClCompile Include="Ghidra\memstate.cc" />
+    <ClCompile Include="Ghidra\merge.cc" />
+    <ClCompile Include="Ghidra\op.cc" />
+    <ClCompile Include="Ghidra\opbehavior.cc" />
+    <ClCompile Include="Ghidra\opcodes.cc" />
+    <ClCompile Include="Ghidra\options.cc" />
+    <ClCompile Include="Ghidra\override.cc" />
+    <ClCompile Include="Ghidra\paramid.cc" />
+    <ClCompile Include="Ghidra\pcodecompile.cc" />
+    <ClCompile Include="Ghidra\pcodeinject.cc" />
+    <ClCompile Include="Ghidra\pcodeparse.cc" />
+    <ClCompile Include="Ghidra\pcoderaw.cc" />
+    <ClCompile Include="Ghidra\prefersplit.cc" />
+    <ClCompile Include="Ghidra\prettyprint.cc" />
+    <ClCompile Include="Ghidra\printc.cc" />
+    <ClCompile Include="Ghidra\printjava.cc" />
+    <ClCompile Include="Ghidra\printlanguage.cc" />
+    <ClCompile Include="Ghidra\rangeutil.cc" />
+    <ClCompile Include="Ghidra\ruleaction.cc" />
+    <ClCompile Include="Ghidra\rulecompile.cc" />
+    <ClCompile Include="Ghidra\semantics.cc" />
+    <ClCompile Include="Ghidra\sleigh.cc" />
+    <ClCompile Include="Ghidra\sleighbase.cc" />
+    <ClCompile Include="Ghidra\sleigh_arch.cc" />
+    <ClCompile Include="Ghidra\slghparse.cc" />
+    <ClCompile Include="Ghidra\slghpatexpress.cc" />
+    <ClCompile Include="Ghidra\slghpattern.cc" />
+    <ClCompile Include="Ghidra\slghscan.cc" />
+    <ClCompile Include="Ghidra\slghsymbol.cc" />
+    <ClCompile Include="Ghidra\slgh_compile.cc" />
+    <ClCompile Include="Ghidra\space.cc" />
+    <ClCompile Include="Ghidra\stringmanage.cc" />
+    <ClCompile Include="Ghidra\subflow.cc" />
+    <ClCompile Include="Ghidra\transform.cc" />
+    <ClCompile Include="Ghidra\translate.cc" />
+    <ClCompile Include="Ghidra\type.cc" />
+    <ClCompile Include="Ghidra\typeop.cc" />
+    <ClCompile Include="Ghidra\unify.cc" />
+    <ClCompile Include="Ghidra\userop.cc" />
+    <ClCompile Include="Ghidra\variable.cc" />
+    <ClCompile Include="Ghidra\varmap.cc" />
+    <ClCompile Include="Ghidra\varnode.cc" />
+    <ClCompile Include="Ghidra\xml.cc" />
+    <ClCompile Include="Ghidra\xml_arch.cc" />
+    <ClCompile Include="GhidraDecompiler.cpp" />
     <ClCompile Include="GuiParser.cpp" />
+    <ClCompile Include="IDASymbol.cpp" />
+    <ClCompile Include="IDAWrapper.cpp" />
     <ClCompile Include="ImportsParser.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="oxFF\BasicBlock.cpp" />
-    <ClCompile Include="oxFF\ControlFlowGraph.cpp" />
-    <ClCompile Include="oxFF\oxFF.cpp" />
+    <ClCompile Include="loadimage_ecat.cpp" />
+    <ClCompile Include="plugin.cpp" />
     <ClCompile Include="SectionManager.cpp" />
     <ClCompile Include="TrieTree.cpp" />
     <ClCompile Include="UserResourceParser.cpp" />
@@ -179,13 +262,97 @@
     <ClInclude Include="EAppControl\krnl_Timer.h" />
     <ClInclude Include="EAppControl\krnl_VScrollBar.h" />
     <ClInclude Include="EAppControl\krnl_window.h" />
+    <ClInclude Include="EazyDecompiler.h" />
+    <ClInclude Include="IDAArchitecture.h" />
     <ClInclude Include="ECSigParser.h" />
     <ClInclude Include="EsigScanner.h" />
+    <ClInclude Include="Ghidra\action.hh" />
+    <ClInclude Include="Ghidra\address.hh" />
+    <ClInclude Include="Ghidra\architecture.hh" />
+    <ClInclude Include="Ghidra\block.hh" />
+    <ClInclude Include="Ghidra\blockaction.hh" />
+    <ClInclude Include="Ghidra\callgraph.hh" />
+    <ClInclude Include="Ghidra\capability.hh" />
+    <ClInclude Include="Ghidra\cast.hh" />
+    <ClInclude Include="Ghidra\comment.hh" />
+    <ClInclude Include="Ghidra\condexe.hh" />
+    <ClInclude Include="Ghidra\context.hh" />
+    <ClInclude Include="Ghidra\coreaction.hh" />
+    <ClInclude Include="Ghidra\cover.hh" />
+    <ClInclude Include="Ghidra\cpool.hh" />
+    <ClInclude Include="Ghidra\crc32.hh" />
+    <ClInclude Include="Ghidra\database.hh" />
+    <ClInclude Include="Ghidra\double.hh" />
+    <ClInclude Include="Ghidra\dynamic.hh" />
+    <ClInclude Include="Ghidra\emulate.hh" />
+    <ClInclude Include="Ghidra\emulateutil.hh" />
+    <ClInclude Include="Ghidra\error.hh" />
+    <ClInclude Include="Ghidra\filemanage.hh" />
+    <ClInclude Include="Ghidra\float.hh" />
+    <ClInclude Include="Ghidra\flow.hh" />
+    <ClInclude Include="Ghidra\fspec.hh" />
+    <ClInclude Include="Ghidra\funcdata.hh" />
+    <ClInclude Include="Ghidra\globalcontext.hh" />
+    <ClInclude Include="Ghidra\grammar.hh" />
+    <ClInclude Include="Ghidra\graph.hh" />
+    <ClInclude Include="Ghidra\heritage.hh" />
+    <ClInclude Include="Ghidra\inject_sleigh.hh" />
+    <ClInclude Include="Ghidra\jumptable.hh" />
+    <ClInclude Include="Ghidra\loadimage.hh" />
+    <ClInclude Include="Ghidra\loadimage_xml.hh" />
+    <ClInclude Include="Ghidra\memstate.hh" />
+    <ClInclude Include="Ghidra\merge.hh" />
+    <ClInclude Include="Ghidra\op.hh" />
+    <ClInclude Include="Ghidra\opbehavior.hh" />
+    <ClInclude Include="Ghidra\opcodes.hh" />
+    <ClInclude Include="Ghidra\options.hh" />
+    <ClInclude Include="Ghidra\override.hh" />
+    <ClInclude Include="Ghidra\paramid.hh" />
+    <ClInclude Include="Ghidra\partmap.hh" />
+    <ClInclude Include="Ghidra\pcodecompile.hh" />
+    <ClInclude Include="Ghidra\pcodeinject.hh" />
+    <ClInclude Include="Ghidra\pcodeparse.hh" />
+    <ClInclude Include="Ghidra\pcoderaw.hh" />
+    <ClInclude Include="Ghidra\prefersplit.hh" />
+    <ClInclude Include="Ghidra\prettyprint.hh" />
+    <ClInclude Include="Ghidra\printc.hh" />
+    <ClInclude Include="Ghidra\printjava.hh" />
+    <ClInclude Include="Ghidra\printlanguage.hh" />
+    <ClInclude Include="Ghidra\rangemap.hh" />
+    <ClInclude Include="Ghidra\rangeutil.hh" />
+    <ClInclude Include="Ghidra\ruleaction.hh" />
+    <ClInclude Include="Ghidra\rulecompile.hh" />
+    <ClInclude Include="Ghidra\semantics.hh" />
+    <ClInclude Include="Ghidra\sleigh.hh" />
+    <ClInclude Include="Ghidra\sleighbase.hh" />
+    <ClInclude Include="Ghidra\sleigh_arch.hh" />
+    <ClInclude Include="Ghidra\slghparse.hh" />
+    <ClInclude Include="Ghidra\slghpatexpress.hh" />
+    <ClInclude Include="Ghidra\slghpattern.hh" />
+    <ClInclude Include="Ghidra\slghsymbol.hh" />
+    <ClInclude Include="Ghidra\slgh_compile.hh" />
+    <ClInclude Include="Ghidra\space.hh" />
+    <ClInclude Include="Ghidra\stringmanage.hh" />
+    <ClInclude Include="Ghidra\subflow.hh" />
+    <ClInclude Include="Ghidra\transform.hh" />
+    <ClInclude Include="Ghidra\translate.hh" />
+    <ClInclude Include="Ghidra\type.hh" />
+    <ClInclude Include="Ghidra\typeop.hh" />
+    <ClInclude Include="Ghidra\types.h" />
+    <ClInclude Include="Ghidra\unify.hh" />
+    <ClInclude Include="Ghidra\userop.hh" />
+    <ClInclude Include="Ghidra\variable.hh" />
+    <ClInclude Include="Ghidra\varmap.hh" />
+    <ClInclude Include="Ghidra\varnode.hh" />
+    <ClInclude Include="Ghidra\xml.hh" />
+    <ClInclude Include="Ghidra\xml_arch.hh" />
+    <ClInclude Include="GhidraDecompiler.h" />
     <ClInclude Include="GuiParser.h" />
+    <ClInclude Include="IDASymbol.h" />
+    <ClInclude Include="IDAWrapper.h" />
     <ClInclude Include="ImportsParser.h" />
-    <ClInclude Include="oxFF\BasicBlock.h" />
-    <ClInclude Include="oxFF\ControlFlowGraph.h" />
-    <ClInclude Include="oxFF\oxFF.h" />
+    <ClInclude Include="loadimage_ecat.h" />
+    <ClInclude Include="plugin.h" />
     <ClInclude Include="PropertyDelegate.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ControlInfoWidget.h" />
@@ -195,13 +362,18 @@
     <ClInclude Include="UserResourceParser.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="E-Decompiler.rc" />
-  </ItemGroup>
-  <ItemGroup>
     <QtUic Include="ControlInfoWidget.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="ImageResource.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ghidra\grammar.y" />
+    <None Include="Ghidra\pcodeparse.y" />
+    <None Include="Ghidra\ruleparse.y" />
+    <None Include="Ghidra\slghparse.y" />
+    <None Include="Ghidra\slghscan.l" />
+    <None Include="Ghidra\xml.y" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

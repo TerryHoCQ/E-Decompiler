@@ -1,12 +1,13 @@
 #pragma once
-#include <pro.h>
+#include <string>
+#include <vector>
 
 struct SegmentInfomation
 {
-	ea_t m_segStart;                   //区段起始地址
-	uint32 m_segSize;                  //区段大小
-	qstring m_segName;                 //区段名称
-	qvector<unsigned char> m_segData;  //区段数据
+	unsigned int m_segStart;                   //区段起始地址
+	unsigned int m_segSize;                  //区段大小
+	std::string m_segName;                 //区段名称
+	std::vector<unsigned char> m_segData;  //区段数据
 };
 
 class SectionManager
@@ -15,12 +16,12 @@ public:
 	//初始化程序区段
 	static bool InitSectionManager();
 	//线性地址转换为虚拟地址
-	static uint8* LinearAddrToVirtualAddr(ea_t LinerAddr);
+	static unsigned char* LinearAddrToVirtualAddr(unsigned int LinerAddr);
 	//虚拟地址转换为线性地址
-	static ea_t VirtualAddrToLinearAddr(uint8* pVirtualAddr);
+	static unsigned int VirtualAddrToLinearAddr(unsigned char* pVirtualAddr);
 	//寻找地址,参数为十六进制特征
-	static ea_t SeachBin(qstring HexStr);
+	static unsigned int SeachBin(std::string HexStr);
 private:
-	static qvector<SegmentInfomation> mVec_segInfo;
-	static qvector<unsigned char> m_AllMemBuf;
+	static std::vector<SegmentInfomation> mVec_segInfo;
+	static std::vector<unsigned char> m_AllMemBuf;
 };

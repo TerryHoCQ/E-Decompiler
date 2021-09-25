@@ -16,7 +16,7 @@
 #include "EsigScanner.h"
 #include "ECSigParser.h"
 #include "ImportsParser.h"
-#include "oxFF/oxFF.h"
+#include "GhidraDecompiler.h"
 
 EDecompilerEngine g_MyDecompiler;
 
@@ -282,6 +282,8 @@ bool EDecompilerEngine::InitDecompilerEngine()
 
 bool EDecompilerEngine::DoDecompile()
 {
+	//GhidraWrapper::Instance().LoadFile();
+
 	ea_t funcAddr = get_screen_ea();
 
 	func_t* pFunc = get_func(funcAddr);
@@ -289,7 +291,9 @@ bool EDecompilerEngine::DoDecompile()
 		return false;
 	}
 
-	oxFF::FFDecompile(pFunc);
+	//GhidraWrapper::Instance().DoDecompilerWork(funcAddr);
+
+
 	return true;
 }
 
@@ -348,7 +352,7 @@ bool EDecompilerEngine::ParseKrnlInterface(ea_t lpKrnlEntry)
 	lpKrnlEntry -= sizeof(mid_KrnlApp);
 	get_bytes(&m_eAppInfo.m_KrnlApp, sizeof(mid_KrnlApp), lpKrnlEntry);
 
-	m_eAppInfo.m_KrnlJmp.Jmp_MOtherHelp = SectionManager::SeachBin(jmpOtherHelpHex);
+	m_eAppInfo.m_KrnlJmp.Jmp_MOtherHelp = SectionManager::SeachBin(jmpOtherHelpHex.c_str());
 	if (m_eAppInfo.m_KrnlJmp.Jmp_MOtherHelp == BADADDR) {
 		return false;
 	}

@@ -2,8 +2,9 @@
 #include <segment.hpp>
 #include <bytes.hpp>
 
-qvector<SegmentInfomation> SectionManager::mVec_segInfo;
-qvector<unsigned char> SectionManager::m_AllMemBuf;
+std::vector<SegmentInfomation> SectionManager::mVec_segInfo;
+std::vector<unsigned char> SectionManager::m_AllMemBuf;
+
 
 bool SectionManager::InitSectionManager()
 {
@@ -23,7 +24,7 @@ bool SectionManager::InitSectionManager()
 		bufSize += tmpInfo.m_segSize;
 		qstring SectionName;
 		get_segm_name(&SectionName, pSegment);
-		tmpInfo.m_segName = SectionName;
+		tmpInfo.m_segName.assign(SectionName.c_str(), SectionName.size());
 
 		tmpInfo.m_segData.resize(pSegment->size());
 		get_bytes(&tmpInfo.m_segData[0], pSegment->size(), pSegment->start_ea, GMB_READALL);
@@ -35,7 +36,7 @@ bool SectionManager::InitSectionManager()
 	return true;
 }
 
-ea_t SectionManager::SeachBin(qstring HexStr)
+unsigned int SectionManager::SeachBin(std::string HexStr)
 {
 	ea_t ret = BADADDR;
 	
@@ -57,7 +58,7 @@ ea_t SectionManager::SeachBin(qstring HexStr)
 	return ret;
 }
 
-uint8* SectionManager::LinearAddrToVirtualAddr(ea_t LinerAddr)
+unsigned char* SectionManager::LinearAddrToVirtualAddr(unsigned int LinerAddr)
 {
 	int offset = LinerAddr - mVec_segInfo[0].m_segStart;
 	if (offset < 0) {
@@ -66,8 +67,7 @@ uint8* SectionManager::LinearAddrToVirtualAddr(ea_t LinerAddr)
 	return &m_AllMemBuf[offset];
 }
 
-
-ea_t SectionManager::VirtualAddrToLinearAddr(uint8* pVirtualAddr)
+unsigned int SectionManager::VirtualAddrToLinearAddr(unsigned char* pVirtualAddr)
 {
 	int offset= pVirtualAddr- &m_AllMemBuf[0];
 	if (offset < 0) {

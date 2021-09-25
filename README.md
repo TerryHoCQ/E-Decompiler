@@ -46,3 +46,9 @@
 
 
 
+### 基于项目:
+
+[airbus-cert/Yagi: Yet Another Ghidra Integration for IDA](https://github.com/airbus-cert/Yagi)
+
+[NationalSecurityAgency/ghidra: Ghidra is a software reverse engineering (SRE) framework](https://github.com/NationalSecurityAgency/ghidra)
+

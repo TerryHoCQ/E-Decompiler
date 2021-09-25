@@ -67,4 +67,3 @@ qstring CDR_ReadCString(unsigned char*& currentPoint);
 qvector<unsigned char> CDR_ReadCFreqMem(unsigned char*& currentPoint);
 
 qvector<unsigned int> CDR_ReadVecInt(unsigned char*& currentPoint);
-

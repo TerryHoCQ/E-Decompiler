@@ -3,7 +3,7 @@
 #include <QMap>
 #include <QVariant>
 #include "SectionManager.h"
-#include "oxFF/oxFF.h"
+
 
 enum EProgramsType_t
 {

@@ -14,5 +14,3 @@ private:
 	static QStringList 取横向对齐方式列表();
 	static QStringList 取纵向对齐方式列表();
 };
-
-
