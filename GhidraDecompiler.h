@@ -68,6 +68,16 @@ struct DecompilerResult
 	std::string name;
 	uint64_t ea;
 	std::map<std::string, MemoryLocation> symbolAddress;
+
+	DecompilerResult() 
+	{
+		ea = 0;
+	}
+	DecompilerResult(std::string name, uint64_t ea, std::string cCode, std::map<std::string, MemoryLocation> symbolAddress)
+		:name(name), ea(ea), cCode(cCode), symbolAddress(symbolAddress)
+	{
+
+	}
 };
 
 class GhidraDecompiler
@@ -78,10 +88,11 @@ public:
 
 	static bool InitGhidraDecompiler();
 	DecompilerResult decompile(uint64_t funcAddress);
+
+	std::string GetPcode(uint64_t start,uint64_t end);
 private:
 	bool LoadFile();
 	bool DoDecompilerWork(unsigned int addr);
-
 private:
 	std::unique_ptr<IDAArchitecture> m_architecture;
 };

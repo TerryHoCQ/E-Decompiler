@@ -229,6 +229,7 @@ ssize_t EDecompilerEngine::ui_callback(void* ud, int notification_code, va_list 
 		if (get_widget_type(view) == BWN_DISASM) {
 			TPopupMenu* p = va_arg(va, TPopupMenu*);
 			attach_action_to_popup(view, p, "eDecompiler::GenerateECSig", nullptr, SETMENU_FIRST);
+			attach_action_to_popup(view, p, "ghidra::pcode", nullptr, SETMENU_FIRST);
 		}
 	}
 

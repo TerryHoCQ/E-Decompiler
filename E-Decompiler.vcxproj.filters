@@ -22,6 +22,9 @@
     <Filter Include="头文件\Ghidra">
       <UniqueIdentifier>{c91c4165-000d-4665-822b-af64b1ce4133}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\GhidraDecompiler">
+      <UniqueIdentifier>{3b99fbde-84c4-4faa-8fe0-44372b9899e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SectionManager.cpp">
@@ -132,14 +135,8 @@
     <ClCompile Include="EAppControl\krnl_AnimateBox.cpp">
       <Filter>头文件\EAppControl</Filter>
     </ClCompile>
-    <ClCompile Include="loadimage_ecat.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="IDAWrapper.cpp">
       <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="GhidraDecompiler.cpp">
-      <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Ghidra\action.cc">
       <Filter>头文件\Ghidra</Filter>
@@ -387,11 +384,32 @@
     <ClCompile Include="EazyDecompiler.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="IDAArchitecture.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="common.cpp">
+      <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="IDASymbol.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\GhidraDecompiler</Filter>
+    </ClCompile>
+    <ClCompile Include="IDATypeManager.cpp">
+      <Filter>源文件\GhidraDecompiler</Filter>
+    </ClCompile>
+    <ClCompile Include="IDALoader.cpp">
+      <Filter>源文件\GhidraDecompiler</Filter>
+    </ClCompile>
+    <ClCompile Include="IDAArchitecture.cpp">
+      <Filter>源文件\GhidraDecompiler</Filter>
+    </ClCompile>
+    <ClCompile Include="IDAScope.cpp">
+      <Filter>源文件\GhidraDecompiler</Filter>
+    </ClCompile>
+    <ClCompile Include="exception.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="IDAPrint.cpp">
+      <Filter>源文件\GhidraDecompiler</Filter>
+    </ClCompile>
+    <ClCompile Include="GhidraDecompiler.cpp">
+      <Filter>源文件\GhidraDecompiler</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -506,14 +524,8 @@
     <ClInclude Include="EAppControl\krnl_AnimateBox.h">
       <Filter>头文件\EAppControl</Filter>
     </ClInclude>
-    <ClInclude Include="loadimage_ecat.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
     <ClInclude Include="IDAWrapper.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="GhidraDecompiler.h">
-      <Filter>源文件</Filter>
     </ClInclude>
     <ClInclude Include="Ghidra\action.hh">
       <Filter>头文件\Ghidra</Filter>
@@ -764,11 +776,32 @@
     <ClInclude Include="EazyDecompiler.h">
       <Filter>源文件</Filter>
     </ClInclude>
-    <ClInclude Include="IDAArchitecture.h">
-      <Filter>源文件</Filter>
+    <ClInclude Include="common.h">
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="IDASymbol.h">
-      <Filter>源文件</Filter>
+      <Filter>源文件\GhidraDecompiler</Filter>
+    </ClInclude>
+    <ClInclude Include="IDATypeManager.h">
+      <Filter>源文件\GhidraDecompiler</Filter>
+    </ClInclude>
+    <ClInclude Include="IDALoader.h">
+      <Filter>源文件\GhidraDecompiler</Filter>
+    </ClInclude>
+    <ClInclude Include="IDAArchitecture.h">
+      <Filter>源文件\GhidraDecompiler</Filter>
+    </ClInclude>
+    <ClInclude Include="IDAScope.h">
+      <Filter>源文件\GhidraDecompiler</Filter>
+    </ClInclude>
+    <ClInclude Include="exception.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IDAPrint.h">
+      <Filter>源文件\GhidraDecompiler</Filter>
+    </ClInclude>
+    <ClInclude Include="GhidraDecompiler.h">
+      <Filter>源文件\GhidraDecompiler</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

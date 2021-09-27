@@ -110,6 +110,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="common.cpp" />
     <ClCompile Include="common\IDAMenu.cpp" />
     <ClCompile Include="common\md5.cpp" />
     <ClCompile Include="common\public.cpp" />
@@ -139,6 +140,7 @@
     <ClCompile Include="EAppControl\krnl_VScrollBar.cpp" />
     <ClCompile Include="EAppControl\krnl_window.cpp" />
     <ClCompile Include="EazyDecompiler.cpp" />
+    <ClCompile Include="exception.cpp" />
     <ClCompile Include="IDAArchitecture.cpp" />
     <ClCompile Include="ECSigParser.cpp" />
     <ClCompile Include="EDecompiler.cpp" />
@@ -225,16 +227,20 @@
     <ClCompile Include="Ghidra\xml_arch.cc" />
     <ClCompile Include="GhidraDecompiler.cpp" />
     <ClCompile Include="GuiParser.cpp" />
+    <ClCompile Include="IDAPrint.cpp" />
+    <ClCompile Include="IDAScope.cpp" />
     <ClCompile Include="IDASymbol.cpp" />
+    <ClCompile Include="IDATypeManager.cpp" />
     <ClCompile Include="IDAWrapper.cpp" />
     <ClCompile Include="ImportsParser.cpp" />
-    <ClCompile Include="loadimage_ecat.cpp" />
+    <ClCompile Include="IDALoader.cpp" />
     <ClCompile Include="plugin.cpp" />
     <ClCompile Include="SectionManager.cpp" />
     <ClCompile Include="TrieTree.cpp" />
     <ClCompile Include="UserResourceParser.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="common.h" />
     <ClInclude Include="common\IDAMenu.h" />
     <ClInclude Include="common\md5.h" />
     <ClInclude Include="common\public.h" />
@@ -263,6 +269,7 @@
     <ClInclude Include="EAppControl\krnl_VScrollBar.h" />
     <ClInclude Include="EAppControl\krnl_window.h" />
     <ClInclude Include="EazyDecompiler.h" />
+    <ClInclude Include="exception.h" />
     <ClInclude Include="IDAArchitecture.h" />
     <ClInclude Include="ECSigParser.h" />
     <ClInclude Include="EsigScanner.h" />
@@ -348,10 +355,13 @@
     <ClInclude Include="Ghidra\xml_arch.hh" />
     <ClInclude Include="GhidraDecompiler.h" />
     <ClInclude Include="GuiParser.h" />
+    <ClInclude Include="IDAPrint.h" />
+    <ClInclude Include="IDAScope.h" />
     <ClInclude Include="IDASymbol.h" />
+    <ClInclude Include="IDATypeManager.h" />
     <ClInclude Include="IDAWrapper.h" />
     <ClInclude Include="ImportsParser.h" />
-    <ClInclude Include="loadimage_ecat.h" />
+    <ClInclude Include="IDALoader.h" />
     <ClInclude Include="plugin.h" />
     <ClInclude Include="PropertyDelegate.h" />
     <ClInclude Include="resource.h" />

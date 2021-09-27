@@ -2,16 +2,21 @@
 #include <string>
 #include <memory>
 
-class SymbolInfo
+//符号信息
+struct SymbolInfo
 {
-	//地址
 	uint64_t m_ea;
-	//名称
 	std::string m_name;
+
+	SymbolInfo(uint64_t ea, std::string name) :m_ea(ea), m_name(name)
+	{
+
+	}
 };
 
 class IDASymbol
 {
 public:
 	std::unique_ptr<SymbolInfo> find(uint64_t ea);
+	std::unique_ptr<SymbolInfo> find_function(uint64_t ea);
 };

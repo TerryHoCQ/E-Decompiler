@@ -2,6 +2,7 @@
 #include "Ghidra/funcdata.hh"
 #include "IDAArchitecture.h"
 #include "IDAWrapper.h"
+#include "IDAPrint.h"
 
 GhidraDecompiler::GhidraDecompiler(std::unique_ptr<IDAArchitecture> arch) :
 	m_architecture(std::move(arch))
@@ -25,47 +26,46 @@ DecompilerResult GhidraDecompiler::decompile(uint64_t funcAddress)
 	DecompilerResult result;
 	try
 	{
-		//auto funcSym = m_architecture->getSymbolDatabase().find_function(funcAddress);
+		auto funcSym = m_architecture->getSymbolDatabase().find_function(funcAddress);
 
-		//if (!funcSym.has_value())
-		//{
-		//	return result;
-		//}
+		if (!funcSym)
+		{
+			return result;
+		}
 
 		auto scope = m_architecture->symboltab->getGlobalScope();
 		// clear scope to update all symbols
-		scope->clear();
+		//scope->clear();
 
-		//auto func = scope->findFunction(
-		//	Address(
-		//		m_architecture->getDefaultCodeSpace(),
-		//		funcSym.value()->getSymbol().getAddress()
-		//	)
-		//);
+		auto fd = scope->findFunction(Address(m_architecture->getDefaultCodeSpace(), funcSym->m_ea));
 
-		//m_architecture->clearAnalysis(func);
-		//m_architecture->performActions(*func);
+		m_architecture->clearAnalysis(fd);
+		m_architecture->performActions(*fd);
 
-		m_architecture->setPrintLanguage("yagi-c-language");
+		m_architecture->setPrintLanguage("e-language");
 
 		stringstream ss;
 		m_architecture->print->setIndentIncrement(3);
 		m_architecture->print->setOutputStream(&ss);
 
 		//print as C
-		//m_architecture->print->docFunction(func);
+		m_architecture->print->docFunction(fd);
 
 		// get back context information
-		//auto idaPrint = static_cast<IdaPrint*>(m_architecture->print);
-		
-		return result;
+		auto idaPrint = static_cast<IDAPrint*>(m_architecture->print);
+		return DecompilerResult(funcSym->m_name, funcSym->m_ea, ss.str(), idaPrint->getEmitter().getSymbolAddr());
 	}
 	catch (...) 
 	{
-
+		int a = 0;
 	}
 
 	return result;
+}
+
+std::string GhidraDecompiler::GetPcode(uint64_t start, uint64_t end)
+{
+	return m_architecture->emitPCode(start, end);
 }
 
 bool GhidraDecompiler::LoadFile()
