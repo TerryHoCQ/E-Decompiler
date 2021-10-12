@@ -52,12 +52,12 @@ public:
 	static int MenuHandle_ShowEventInfo();
 
 	//根据控件类型ID来获得具体的类型
-	static ControlType_t GetControlType(unsigned int controlTypeId);
+	//static ControlType_t GetControlType(unsigned int controlTypeId);
 	//根据控件ID直接获取控件属性
-	static bool GetControlInfo(unsigned int controlId, mid_ControlInfo& out_ControlInfo);
+	//static bool GetControlInfo(unsigned int controlId, mid_ControlInfo& out_ControlInfo);
 
-	static void ClearControlTypeMap();
-	static void AddControlType(unsigned int, ControlType_t);
+	//static void ClearControlTypeMap();
+	//static void AddControlType(unsigned int, ControlType_t);
 private:
 	static void ParseControlBasciProperty(unsigned char* lpControlInfo, GuiParser::mid_ControlInfo& out_Property);
 public:

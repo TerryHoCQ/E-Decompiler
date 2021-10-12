@@ -2,12 +2,14 @@
 #include "IDALoader.h"
 #include "IDATypeManager.h"
 #include "IDAScope.h"
+#include "EazyAction.h"
 
 IDAArchitecture::IDAArchitecture(const string& targ):
-	SleighArchitecture("ida", targ, &m_err)
+	SleighArchitecture("ida", targ, &m_err),
+	m_ScanAction(Action::rule_onceperfunc, "ESCAN")
 {
 	
-}
+}	
 
 IDAArchitecture::~IDAArchitecture()
 {
@@ -64,11 +66,10 @@ void IDAArchitecture::buildTypegrp(DocumentStorage& store)
 }
 
 void IDAArchitecture::buildAction(DocumentStorage& store)
-{
-	//添加基本分析动作+分析规则
+{	
 	SleighArchitecture::buildAction(store);
 
-	
+	//m_ScanAction.addAction(new EActionScanKernel("eaction"),);
 }
 
 Translate* IDAArchitecture::buildTranslator(DocumentStorage& store)
@@ -80,18 +81,10 @@ Translate* IDAArchitecture::buildTranslator(DocumentStorage& store)
 int4 IDAArchitecture::performActions(Funcdata& data)
 {
 	allacts.getCurrent()->reset(data);
-	// m_renameAction.reset(data);
-	//m_retypeAction.reset(data);
+	m_ScanAction.reset(data);
 
-	// Break just after start action
-	// to have the CFG built
-	//bool test = allacts.getCurrent()->setBreakPoint(Action::break_start, "constbase");
-
-	auto res = allacts.getCurrent()->perform(data);
-	//m_retypeAction.perform(data);
-
-	//allacts.getCurrent()->clearBreakPoints();
-	//res = allacts.getCurrent()->perform(data);
+	allacts.getCurrent()->perform(data);
+	auto res = m_ScanAction.perform(data);
 
 	if (res < 0)
 	{
@@ -99,7 +92,6 @@ int4 IDAArchitecture::performActions(Funcdata& data)
 	}
 
 	return res;
-	//return res + m_renameAction.perform(data);
 }
 
 std::string IDAArchitecture::emitPCode(unsigned int startAddr, unsigned int endAddr)

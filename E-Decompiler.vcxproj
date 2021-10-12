@@ -77,6 +77,7 @@
       <AdditionalIncludeDirectories>C:\MyLib\idasdk75\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>QT_NAMESPACE=QT;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BufferSecurityCheck>false</BufferSecurityCheck>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>C:\MyLib\idasdk75\lib\x64_win_vc_32;C:\MyLib\idasdk75\lib\x64_win_qt;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -139,7 +140,9 @@
     <ClCompile Include="EAppControl\krnl_Timer.cpp" />
     <ClCompile Include="EAppControl\krnl_VScrollBar.cpp" />
     <ClCompile Include="EAppControl\krnl_window.cpp" />
-    <ClCompile Include="EazyDecompiler.cpp" />
+    <ClCompile Include="EazyAction.cpp" />
+    <ClCompile Include="EKernelLib.cpp" />
+    <ClCompile Include="EStaticArchitecture.cpp" />
     <ClCompile Include="exception.cpp" />
     <ClCompile Include="IDAArchitecture.cpp" />
     <ClCompile Include="ECSigParser.cpp" />
@@ -268,7 +271,10 @@
     <ClInclude Include="EAppControl\krnl_Timer.h" />
     <ClInclude Include="EAppControl\krnl_VScrollBar.h" />
     <ClInclude Include="EAppControl\krnl_window.h" />
-    <ClInclude Include="EazyDecompiler.h" />
+    <ClInclude Include="EazyAction.h" />
+    <ClInclude Include="EKernelLib.h" />
+    <ClInclude Include="EObject_Include.h" />
+    <ClInclude Include="EStaticArchitecture.h" />
     <ClInclude Include="exception.h" />
     <ClInclude Include="IDAArchitecture.h" />
     <ClInclude Include="ECSigParser.h" />

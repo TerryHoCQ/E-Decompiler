@@ -3,10 +3,9 @@
 #include <map>
 #include <memory>
 
-//Ghidra原始反编译器
+//Ghidra反编译器
 
 class IDAArchitecture;
-
 struct MemoryLocation
 {
 	enum class MemoryLocationType
@@ -69,7 +68,7 @@ struct DecompilerResult
 	uint64_t ea;
 	std::map<std::string, MemoryLocation> symbolAddress;
 
-	DecompilerResult() 
+	DecompilerResult()
 	{
 		ea = 0;
 	}
@@ -80,19 +79,29 @@ struct DecompilerResult
 	}
 };
 
+enum ArchType
+{
+	UNKNOWN_ARCH,
+	ESTATIC_ARCH,
+	EDYNAMIC_ARCH,
+};
+
+
 class GhidraDecompiler
 {
 public:
-	explicit GhidraDecompiler(std::unique_ptr<IDAArchitecture> arch);
-	virtual ~GhidraDecompiler() = default;
-
-	static bool InitGhidraDecompiler();
+	GhidraDecompiler();
+	~GhidraDecompiler();
 	DecompilerResult decompile(uint64_t funcAddress);
 
 	std::string GetPcode(uint64_t start,uint64_t end);
+
+	static bool InitGhidraDecompiler();
+	static std::unique_ptr<GhidraDecompiler> build();
 private:
-	bool LoadFile();
-	bool DoDecompilerWork(unsigned int addr);
+	ArchType DetectArchitecture();
+public:
+	std::unique_ptr<IDAArchitecture> m_architecture = nullptr;
 private:
-	std::unique_ptr<IDAArchitecture> m_architecture;
+
 };

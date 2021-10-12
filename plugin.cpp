@@ -1,9 +1,11 @@
 #include "plugin.h"
 #include <hexrays.hpp>
 #include "EDecompiler.h"
-#include "EazyDecompiler.h"
 #include <sstream>
 #include "common/public.h"
+
+qstring ActHandler_EmitGhidraPCode::actionName;
+qstring ActHandler_EmitGhidraPCode::actionLabel;
 
 static int processor_id() {
 #if IDA_SDK_VERSION < 750
@@ -12,8 +14,6 @@ static int processor_id() {
 	return PH.id;
 #endif
 }
-
-#define ACTION_GEN_PCODE "ghidra::pcode"
 
 static void idaapi _Close(TWidget* cv, void* ud)
 {
@@ -33,72 +33,33 @@ static const custom_viewer_handlers_t _ViewHandlers(
 	nullptr
 );
 
-struct action_EmitGhidraPCode :public action_handler_t
-{
-	action_EmitGhidraPCode(Plugin* p)
-	{
-		plugin = p;
-	}
-	int idaapi activate(action_activation_ctx_t* ctx)
-	{
-		plugin->printPcode();
-		return 1;
-	}
-	action_state_t idaapi update(action_update_ctx_t* ctx)
-	{
-		return AST_ENABLE_ALWAYS;
-	}
-private:
-	Plugin* plugin;
-};
 
+ssize_t menu_callback(void* ud, int notification_code, va_list va)
+{
+	if (notification_code == ui_populating_widget_popup) {
+		TWidget* view = va_arg(va, TWidget*);
+		if (get_widget_type(view) == BWN_DISASM) {
+			TPopupMenu* p = va_arg(va, TPopupMenu*);
+			//attach_action_to_popup(view, p, "eDecompiler::GenerateECSig", nullptr, SETMENU_FIRST);
+			attach_action_to_popup(view, p, ActHandler_EmitGhidraPCode::actionName.c_str(), nullptr, SETMENU_FIRST);
+		}
+	}
+
+	return 0;
+}
 
 
 Plugin::Plugin(std::unique_ptr<GhidraDecompiler> decompiler) :
 	m_decompiler(std::move(decompiler))
 {
-	hook_to_notification_point(HT_UI, g_MyDecompiler.ui_callback);
-
-	action_emitPCode = new action_EmitGhidraPCode(this);
-	//添加生成PCode菜单
-	qstring menuName = getUTF8String("生成Ghidra P-code");
-	const action_desc_t act_GenPCode = { sizeof(action_desc_t),ACTION_GEN_PCODE,menuName.c_str(),
-		action_emitPCode,this,nullptr,nullptr,0,ADF_OT_PLUGIN };
-
-	register_action(act_GenPCode);
-
+	hook_to_notification_point(HT_UI, menu_callback);
+	register_action(act_emitGhidraPCode_desc);
 }
 
 Plugin::~Plugin()
 {
 	term_hexrays_plugin();
-	unhook_from_notification_point(HT_UI, g_MyDecompiler.ui_callback);
-	if (action_emitPCode) {
-		delete action_emitPCode;
-		action_emitPCode = nullptr;
-	}
-}
-
-void Plugin::printPcode()
-{
-	TWidget* currentViewer = get_current_viewer();
-	if (!currentViewer) {
-		return;
-	}
-
-	ea_t StartEA = 0;
-	ea_t EndEA;
-	std::string result;
-	if (!read_range_selection(currentViewer, &StartEA, &EndEA)) {
-		StartEA = get_screen_ea();
-		result = m_decompiler->GetPcode(StartEA, StartEA + 1);
-	}
-	else {
-		result = m_decompiler->GetPcode(StartEA, EndEA);
-	}
-	
-	msg(result.c_str());
-	int a = 0;
+	unhook_from_notification_point(HT_UI, menu_callback);
 }
 
 void Plugin::view(const std::string& name, const DecompilerResult& code)const
@@ -160,16 +121,11 @@ static plugmod_t* idaapi init()
 		return nullptr;
 	}
 
-	//To do...在这里判断是什么易语言
 	if (processor_id() != PLFM_386) {
 		return nullptr;
 	}
 
-	if (!GhidraDecompiler::InitGhidraDecompiler()) {
-		return nullptr;
-	}
-
-	auto decompiler = EazyDecompiler::build();
+	auto decompiler = GhidraDecompiler::build();
 	if (!decompiler) {
 		return nullptr;
 	}

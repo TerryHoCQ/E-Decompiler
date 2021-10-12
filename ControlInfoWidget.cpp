@@ -52,11 +52,11 @@ void ControlInfoWidget::on_controlClicked(QTreeWidgetItem* item, int column)
 		unsigned int controlId = item->data(0, Qt::UserRole).toUInt();
 
 		GuiParser::mid_ControlInfo currentControl;
-		if (GuiParser::GetControlInfo(controlId, currentControl)) {
-			ui.groupBox->setTitle(QString::fromLocal8Bit(currentControl.m_controlTypeName.c_str()));
-			ControlType_t controlType = GuiParser::GetControlType(currentControl.m_controlTypeId);
-			EAppControl::显示控件信息(controlType, currentControl.m_propertyAddr, currentControl.m_propertySize);
-		}
+		//if (GuiParser::GetControlInfo(controlId, currentControl)) {
+		//	ui.groupBox->setTitle(QString::fromLocal8Bit(currentControl.m_controlTypeName.c_str()));
+		//	ControlType_t controlType = GuiParser::GetControlType(currentControl.m_controlTypeId);
+		//	EAppControl::显示控件信息(controlType, currentControl.m_propertyAddr, currentControl.m_propertySize);
+		//}
 	}
 
 }

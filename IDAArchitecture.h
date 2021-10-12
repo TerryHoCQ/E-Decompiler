@@ -45,4 +45,6 @@ private:
 	//╥Ш╨епео╒
 	std::unique_ptr<IDASymbol> m_symbols;
 	std::map<std::string, std::string> m_injectionMap;
+
+	ActionGroup m_ScanAction;
 };

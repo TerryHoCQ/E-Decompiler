@@ -25,6 +25,9 @@
     <Filter Include="源文件\GhidraDecompiler">
       <UniqueIdentifier>{3b99fbde-84c4-4faa-8fe0-44372b9899e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Architecture">
+      <UniqueIdentifier>{0b5e1b06-d774-4f68-80a7-36e379d0cb1f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SectionManager.cpp">
@@ -381,9 +384,6 @@
     <ClCompile Include="plugin.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="EazyDecompiler.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="common.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
@@ -394,9 +394,6 @@
       <Filter>源文件\GhidraDecompiler</Filter>
     </ClCompile>
     <ClCompile Include="IDALoader.cpp">
-      <Filter>源文件\GhidraDecompiler</Filter>
-    </ClCompile>
-    <ClCompile Include="IDAArchitecture.cpp">
       <Filter>源文件\GhidraDecompiler</Filter>
     </ClCompile>
     <ClCompile Include="IDAScope.cpp">
@@ -410,6 +407,18 @@
     </ClCompile>
     <ClCompile Include="GhidraDecompiler.cpp">
       <Filter>源文件\GhidraDecompiler</Filter>
+    </ClCompile>
+    <ClCompile Include="EazyAction.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="EKernelLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="IDAArchitecture.cpp">
+      <Filter>源文件\Architecture</Filter>
+    </ClCompile>
+    <ClCompile Include="EStaticArchitecture.cpp">
+      <Filter>源文件\Architecture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -773,9 +782,6 @@
     <ClInclude Include="plugin.h">
       <Filter>源文件</Filter>
     </ClInclude>
-    <ClInclude Include="EazyDecompiler.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
     <ClInclude Include="common.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -786,9 +792,6 @@
       <Filter>源文件\GhidraDecompiler</Filter>
     </ClInclude>
     <ClInclude Include="IDALoader.h">
-      <Filter>源文件\GhidraDecompiler</Filter>
-    </ClInclude>
-    <ClInclude Include="IDAArchitecture.h">
       <Filter>源文件\GhidraDecompiler</Filter>
     </ClInclude>
     <ClInclude Include="IDAScope.h">
@@ -802,6 +805,21 @@
     </ClInclude>
     <ClInclude Include="GhidraDecompiler.h">
       <Filter>源文件\GhidraDecompiler</Filter>
+    </ClInclude>
+    <ClInclude Include="EazyAction.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="EObject_Include.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="EKernelLib.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IDAArchitecture.h">
+      <Filter>源文件\Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="EStaticArchitecture.h">
+      <Filter>源文件\Architecture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

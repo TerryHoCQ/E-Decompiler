@@ -52,3 +52,9 @@
 
 [NationalSecurityAgency/ghidra: Ghidra is a software reverse engineering (SRE) framework](https://github.com/NationalSecurityAgency/ghidra)
 
+### 参考资料
+
+https://chaotic.gd/ghidra-decompiler-docs-built/index.html
+
+[Online Courses – Ghidra](https://ghidra.re/online-courses/)
+

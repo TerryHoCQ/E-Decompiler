@@ -3,21 +3,86 @@
 #include "IDAArchitecture.h"
 #include "IDAWrapper.h"
 #include "IDAPrint.h"
+#include "SectionManager.h"
+#include "EObject_Include.h"
+#include "EStaticArchitecture.h"
+#include "exception.h"
 
-GhidraDecompiler::GhidraDecompiler(std::unique_ptr<IDAArchitecture> arch) :
-	m_architecture(std::move(arch))
+GhidraDecompiler::GhidraDecompiler()
 {
 
 }
 
+GhidraDecompiler::~GhidraDecompiler()
+{
+	
+}
+
+ArchType GhidraDecompiler::DetectArchitecture()
+{
+	unsigned int eMagicHead = SectionManager::SeachBin("50 64 89 25 00 00 00 00 81 EC AC 01 00 00 53 56 57");
+	if (eMagicHead != -1) {
+		unsigned int dwHeadAddr = IDAWrapper::get_dword(eMagicHead + 0x26);
+		EStaticHead eHead;
+		IDAWrapper::get_bytes(&eHead, sizeof(EStaticHead), dwHeadAddr);
+		if (eHead.dwMagic == 0x3) {
+			auto staticArch = std::make_unique<EStaticArchitecture>();
+			if (staticArch->Parse_EStatic(dwHeadAddr)) {
+				m_architecture = std::move(staticArch);
+				return ESTATIC_ARCH;
+			}
+		}
+	}
+
+	//Ç¿ÖÆËÑË÷Ò×ÓïÑÔ¾²Ì¬±àÒëÌØÕ÷
+	//To do...
+	return UNKNOWN_ARCH;
+}
+
+std::unique_ptr<GhidraDecompiler> GhidraDecompiler::build()
+{
+	if (!GhidraDecompiler::InitGhidraDecompiler()) {
+		return nullptr;
+	}
+
+	if (!SectionManager::InitSectionManager()) {
+		return nullptr;
+	}
+
+	auto decompiler = std::make_unique<GhidraDecompiler>();
+	
+	//ÅÐ¶ÏÓïÑÔ
+	ArchType type = decompiler->DetectArchitecture();
+	if (type == UNKNOWN_ARCH) {
+		return nullptr;
+	}
+
+	if (decompiler->m_architecture) {
+		try
+		{
+			DocumentStorage store;
+			decompiler->m_architecture->init(store);
+		}
+		catch (Error& e)
+		{
+			return nullptr;
+		}
+	}
+
+	return decompiler;
+}
+
 bool GhidraDecompiler::InitGhidraDecompiler()
 {
-	CapabilityPoint::initializeAll();
-	ArchitectureCapability::sortCapabilities();
+	static bool bInited = false;
+	if (!bInited) {
+		CapabilityPoint::initializeAll();
+		ArchitectureCapability::sortCapabilities();
 
-	std::string idaDir = IDAWrapper::idadir("plugins");
-	SleighArchitecture::scanForSleighDirectories(idaDir + "\\Ghidra");
-
+		std::string idaDir = IDAWrapper::idadir("plugins");
+		SleighArchitecture::scanForSleighDirectories(idaDir + "\\Ghidra");
+		bInited = true;
+	}
 	return true;
 }
 
@@ -66,61 +131,4 @@ DecompilerResult GhidraDecompiler::decompile(uint64_t funcAddress)
 std::string GhidraDecompiler::GetPcode(uint64_t start, uint64_t end)
 {
 	return m_architecture->emitPCode(start, end);
-}
-
-bool GhidraDecompiler::LoadFile()
-{
-	//std::string fileName;
-	//std::string target = "x86:LE:32:default";
-	//
-	//arch = new ECatArchitecture(fileName, target);
-	//DocumentStorage store;
-	//arch->init(store);
-
-
-
-	return true;
-}
-
-bool GhidraDecompiler::DoDecompilerWork(unsigned int addr)
-{
-	//Address funcEntry(arch->getDefaultCodeSpace(), addr);
-	////Funcdata* fd = GhidraDecompiler::Instance().arch->symboltab->getGlobalScope()->queryFunction(funcEntry);
-	//if (fd == NULL) {
-	//	//To do...
-	//	std::string funcName = "func_test";
-	//	//fd = GhidraWrapper::Instance().arch->symboltab->getGlobalScope()->addFunction(funcEntry, funcName)->getFunction();
-	//	if (fd == NULL) {
-	//		return false;
-	//	}
-	//}
-	//
-	//if (fd->hasNoCode()) {
-	//	return false;
-	//}
-	//
-	//if (fd->isProcStarted()) {
-	//	return false;
-	//}
-
-	//arch->allacts.getCurrent()->reset(*fd);
-	//int res = arch->allacts.getCurrent()->perform(*fd);
-	//if (res < 0) {
-	//	return false;
-	//}
-	//
-	//std::stringstream decompileResult;
-	//arch->print->setOutputStream(&decompileResult);
-	//arch->print->docFunction(fd);
-	//
-	//std::string test = decompileResult.str();
-	//
-	//CustomCodeViewer* pCustomCodeViewer = new CustomCodeViewer();
-	//IDAWrapper::display_widget(pCustomCodeViewer, 0x400004);
-
-
-
-	return 0;
-
-	return true;
 }
