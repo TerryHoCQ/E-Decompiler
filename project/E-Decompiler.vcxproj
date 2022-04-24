@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{69D9DE55-0316-4B15-9B72-4574CE8152CE}</ProjectGuid>
+    <Keyword>QtVS_v304</Keyword>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.18362.0</WindowsTargetPlatformVersion>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
+    <Import Project="$(QtMsBuild)\qt_defaults.props" />
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
+    <QtInstall>5.6.3_msvc2015_64</QtInstall>
+    <QtModules>core;gui;widgets</QtModules>
+    <QtBuildConfig>debug</QtBuildConfig>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
+    <QtInstall>5.6.3_msvc2015_64</QtInstall>
+    <QtModules>core;gui;widgets</QtModules>
+    <QtBuildConfig>release</QtBuildConfig>
+  </PropertyGroup>
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <OutDir>D:\fjqisba\IDA 7.5 SP3\plugins</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutDir>D:\fjqisba\IDA 7.5 SP3\plugins</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\MyLib\idasdk75\include;.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>QT_NAMESPACE=QT;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>Default</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>C:\MyLib\idasdk75\lib\x64_win_vc_32;C:\MyLib\idasdk75\lib\x64_win_qt;.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ida.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;capstone.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\MyLib\idasdk75\include;.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>QT_NAMESPACE=QT;_WINDOWS;ZYCORE_STATIC_DEFINE;ZYDIS_STATIC_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>C:\MyLib\idasdk75\lib\x64_win_vc_32;C:\MyLib\idasdk75\lib\x64_win_qt;.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ida.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;user32.lib;Zydis.lib;Zycore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
+    <ClCompile>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+    <ClCompile>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <Optimization>MaxSpeed</Optimization>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="common.cpp" />
+    <ClCompile Include="common\IDAMenu.cpp" />
+    <ClCompile Include="common\md5.cpp" />
+    <ClCompile Include="common\public.cpp" />
+    <ClCompile Include="ControlInfoWidget.cpp" />
+    <ClCompile Include="DecompilerCore\BasicBlock.cpp" />
+    <ClCompile Include="DecompilerCore\common\Address.cpp" />
+    <ClCompile Include="DecompilerCore\common\Op.cpp" />
+    <ClCompile Include="DecompilerCore\FlowInfo.cpp" />
+    <ClCompile Include="DecompilerCore\DecompilerWrapper.cpp" />
+    <ClCompile Include="DecompilerCore\AddrSpaceManager.cpp" />
+    <ClCompile Include="DecompilerCore\FuncData.cpp" />
+    <ClCompile Include="dotGraph.cpp" />
+    <ClCompile Include="EAppControl\EAppControl.cpp" />
+    <ClCompile Include="EAppControl\EAppControlFactory.cpp" />
+    <ClCompile Include="EAppControl\krnl_AnimateBox.cpp" />
+    <ClCompile Include="EAppControl\krnl_Button.cpp" />
+    <ClCompile Include="EAppControl\krnl_CheckBox.cpp" />
+    <ClCompile Include="EAppControl\krnl_ChkListBox.cpp" />
+    <ClCompile Include="EAppControl\krnl_ComboBox.cpp" />
+    <ClCompile Include="EAppControl\krnl_DrawPanel.cpp" />
+    <ClCompile Include="EAppControl\krnl_DropTarget.cpp" />
+    <ClCompile Include="EAppControl\krnl_EditBox.cpp" />
+    <ClCompile Include="EAppControl\krnl_GroupBox.cpp" />
+    <ClCompile Include="EAppControl\krnl_HScrollBar.cpp" />
+    <ClCompile Include="EAppControl\krnl_Label.cpp" />
+    <ClCompile Include="EAppControl\krnl_ListBox.cpp" />
+    <ClCompile Include="EAppControl\krnl_PicBox.cpp" />
+    <ClCompile Include="EAppControl\krnl_PicBtn.cpp" />
+    <ClCompile Include="EAppControl\krnl_ProcessBar.cpp" />
+    <ClCompile Include="EAppControl\krnl_RadioBox.cpp" />
+    <ClCompile Include="EAppControl\krnl_ShapeBox.cpp" />
+    <ClCompile Include="EAppControl\krnl_SliderBar.cpp" />
+    <ClCompile Include="EAppControl\krnl_Tab.cpp" />
+    <ClCompile Include="EAppControl\krnl_Timer.cpp" />
+    <ClCompile Include="EAppControl\krnl_VScrollBar.cpp" />
+    <ClCompile Include="EAppControl\krnl_window.cpp" />
+    <ClCompile Include="EFuncInfo.cpp" />
+    <ClCompile Include="EKernelLib.cpp" />
+    <ClCompile Include="EStaticArchitecture.cpp" />
+    <ClCompile Include="exception.cpp" />
+    <ClCompile Include="ECSigParser.cpp" />
+    <ClCompile Include="EDecompiler.cpp" />
+    <ClCompile Include="ESigScanner.cpp" />
+    <ClCompile Include="GhidraDecompiler.cpp" />
+    <ClCompile Include="GuiParser.cpp" />
+    <ClCompile Include="Helper\CapstoneWrapper.cpp" />
+    <ClCompile Include="IDAArchitecture.cpp" />
+    <ClCompile Include="IDASymbol.cpp" />
+    <ClCompile Include="IDAWrapper.cpp" />
+    <ClCompile Include="ImportsParser.cpp" />
+    <ClCompile Include="plugin.cpp" />
+    <ClCompile Include="SectionManager.cpp" />
+    <ClCompile Include="TrieTree.cpp" />
+    <ClCompile Include="UserResourceParser.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="common.h" />
+    <ClInclude Include="common\IDAMenu.h" />
+    <ClInclude Include="common\md5.h" />
+    <ClInclude Include="common\public.h" />
+    <ClInclude Include="DecompilerCore\BasicBlock.h" />
+    <ClInclude Include="DecompilerCore\common\Address.h" />
+    <ClInclude Include="DecompilerCore\common\Op.h" />
+    <ClInclude Include="DecompilerCore\FlowInfo.h" />
+    <ClInclude Include="DecompilerCore\DecompilerWrapper.h" />
+    <ClInclude Include="DecompilerCore\AddrSpaceManager.h" />
+    <ClInclude Include="DecompilerCore\FuncData.h" />
+    <ClInclude Include="dotGraph.h" />
+    <ClInclude Include="EAppControl\EAppControl.h" />
+    <ClInclude Include="EAppControl\EAppControlFactory.h" />
+    <ClInclude Include="EAppControl\krnl_AnimateBox.h" />
+    <ClInclude Include="EAppControl\krnl_Button.h" />
+    <ClInclude Include="EAppControl\krnl_CheckBox.h" />
+    <ClInclude Include="EAppControl\krnl_ChkListBox.h" />
+    <ClInclude Include="EAppControl\krnl_ComboBox.h" />
+    <ClInclude Include="EAppControl\krnl_DrawPanel.h" />
+    <ClInclude Include="EAppControl\krnl_DropTarget.h" />
+    <ClInclude Include="EAppControl\krnl_EditBox.h" />
+    <ClInclude Include="EAppControl\krnl_GroupBox.h" />
+    <ClInclude Include="EAppControl\krnl_HScrollBar.h" />
+    <ClInclude Include="EAppControl\krnl_Label.h" />
+    <ClInclude Include="EAppControl\krnl_ListBox.h" />
+    <ClInclude Include="EAppControl\krnl_PicBox.h" />
+    <ClInclude Include="EAppControl\krnl_PicBtn.h" />
+    <ClInclude Include="EAppControl\krnl_ProcessBar.h" />
+    <ClInclude Include="EAppControl\krnl_RadioBox.h" />
+    <ClInclude Include="EAppControl\krnl_ShapeBox.h" />
+    <ClInclude Include="EAppControl\krnl_SliderBar.h" />
+    <ClInclude Include="EAppControl\krnl_Tab.h" />
+    <ClInclude Include="EAppControl\krnl_Timer.h" />
+    <ClInclude Include="EAppControl\krnl_VScrollBar.h" />
+    <ClInclude Include="EAppControl\krnl_window.h" />
+    <ClInclude Include="EFuncInfo.h" />
+    <ClInclude Include="EKernelLib.h" />
+    <ClInclude Include="EObject_Include.h" />
+    <ClInclude Include="EStaticArchitecture.h" />
+    <ClInclude Include="exception.h" />
+    <ClInclude Include="ECSigParser.h" />
+    <ClInclude Include="EsigScanner.h" />
+    <ClInclude Include="GhidraDecompiler.h" />
+    <ClInclude Include="GuiParser.h" />
+    <ClInclude Include="Helper\CapstoneWrapper.h" />
+    <ClInclude Include="IDAArchitecture.h" />
+    <ClInclude Include="IDASymbol.h" />
+    <ClInclude Include="IDAWrapper.h" />
+    <ClInclude Include="ImportsParser.h" />
+    <ClInclude Include="plugin.h" />
+    <ClInclude Include="PropertyDelegate.h" />
+    <ClInclude Include="ControlInfoWidget.h" />
+    <ClInclude Include="EDecompiler.h" />
+    <ClInclude Include="SectionManager.h" />
+    <ClInclude Include="TrieTree.h" />
+    <ClInclude Include="UserResourceParser.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="ControlInfoWidget.ui" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

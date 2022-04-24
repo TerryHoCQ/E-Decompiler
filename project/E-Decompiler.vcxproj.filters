@@ -1,0 +1,386 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{d641d82d-d19e-4af1-9939-54fc71bb54a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{1ae02355-f165-4d42-9e04-230000b0bada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{df496baf-0008-43e1-852a-199d94cd6425}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\EParserModule">
+      <UniqueIdentifier>{7e8b0502-070c-46e6-8e45-10eb25138482}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\common">
+      <UniqueIdentifier>{2b62291f-f5ea-4689-82d2-deed85d98d58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\GhidraDecompiler">
+      <UniqueIdentifier>{3b99fbde-84c4-4faa-8fe0-44372b9899e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Architecture">
+      <UniqueIdentifier>{0b5e1b06-d774-4f68-80a7-36e379d0cb1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\DecompilerCore">
+      <UniqueIdentifier>{e470d742-8618-4de1-a765-f07512e36643}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EAppControl">
+      <UniqueIdentifier>{77f330ff-b920-40f2-873a-b8ea7538d09c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DecompilerCore">
+      <UniqueIdentifier>{892c8f33-bb57-454c-85df-5eaac0dc3e90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DecompilerCore\common">
+      <UniqueIdentifier>{0e9e61f5-ebf2-466f-a117-870074f444ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper">
+      <UniqueIdentifier>{37d14a89-2dc1-4573-8936-1d656bbbd394}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TrieTree.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="EDecompiler.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ControlInfoWidget.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UserResourceParser.cpp">
+      <Filter>头文件\EParserModule</Filter>
+    </ClCompile>
+    <ClCompile Include="GuiParser.cpp">
+      <Filter>头文件\EParserModule</Filter>
+    </ClCompile>
+    <ClCompile Include="ESigScanner.cpp">
+      <Filter>头文件\EParserModule</Filter>
+    </ClCompile>
+    <ClCompile Include="ImportsParser.cpp">
+      <Filter>头文件\EParserModule</Filter>
+    </ClCompile>
+    <ClCompile Include="ECSigParser.cpp">
+      <Filter>头文件\EParserModule</Filter>
+    </ClCompile>
+    <ClCompile Include="common\public.cpp">
+      <Filter>头文件\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\IDAMenu.cpp">
+      <Filter>头文件\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\md5.cpp">
+      <Filter>头文件\common</Filter>
+    </ClCompile>
+    <ClCompile Include="IDAWrapper.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="plugin.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="common.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="IDASymbol.cpp">
+      <Filter>源文件\GhidraDecompiler</Filter>
+    </ClCompile>
+    <ClCompile Include="exception.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GhidraDecompiler.cpp">
+      <Filter>源文件\GhidraDecompiler</Filter>
+    </ClCompile>
+    <ClCompile Include="EKernelLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="EStaticArchitecture.cpp">
+      <Filter>源文件\Architecture</Filter>
+    </ClCompile>
+    <ClCompile Include="EFuncInfo.cpp">
+      <Filter>源文件\Architecture</Filter>
+    </ClCompile>
+    <ClCompile Include="IDAArchitecture.cpp">
+      <Filter>源文件\Architecture</Filter>
+    </ClCompile>
+    <ClCompile Include="dotGraph.cpp">
+      <Filter>源文件\DecompilerCore</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_Label.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_ListBox.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_PicBox.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_PicBtn.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_ProcessBar.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_RadioBox.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_ShapeBox.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_SliderBar.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_Tab.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_Timer.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_VScrollBar.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_window.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\EAppControl.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\EAppControlFactory.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_AnimateBox.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_Button.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_CheckBox.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_ChkListBox.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_ComboBox.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_DrawPanel.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_DropTarget.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_EditBox.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_GroupBox.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="EAppControl\krnl_HScrollBar.cpp">
+      <Filter>EAppControl</Filter>
+    </ClCompile>
+    <ClCompile Include="DecompilerCore\BasicBlock.cpp">
+      <Filter>DecompilerCore</Filter>
+    </ClCompile>
+    <ClCompile Include="DecompilerCore\common\Address.cpp">
+      <Filter>DecompilerCore\common</Filter>
+    </ClCompile>
+    <ClCompile Include="DecompilerCore\FlowInfo.cpp">
+      <Filter>DecompilerCore</Filter>
+    </ClCompile>
+    <ClCompile Include="SectionManager.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DecompilerCore\DecompilerWrapper.cpp">
+      <Filter>DecompilerCore</Filter>
+    </ClCompile>
+    <ClCompile Include="DecompilerCore\common\Op.cpp">
+      <Filter>DecompilerCore\common</Filter>
+    </ClCompile>
+    <ClCompile Include="DecompilerCore\FuncData.cpp">
+      <Filter>DecompilerCore</Filter>
+    </ClCompile>
+    <ClCompile Include="DecompilerCore\AddrSpaceManager.cpp">
+      <Filter>DecompilerCore</Filter>
+    </ClCompile>
+    <ClCompile Include="Helper\CapstoneWrapper.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TrieTree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ControlInfoWidget.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyDelegate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UserResourceParser.h">
+      <Filter>头文件\EParserModule</Filter>
+    </ClInclude>
+    <ClInclude Include="GuiParser.h">
+      <Filter>头文件\EParserModule</Filter>
+    </ClInclude>
+    <ClInclude Include="EsigScanner.h">
+      <Filter>头文件\EParserModule</Filter>
+    </ClInclude>
+    <ClInclude Include="EDecompiler.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ImportsParser.h">
+      <Filter>头文件\EParserModule</Filter>
+    </ClInclude>
+    <ClInclude Include="ECSigParser.h">
+      <Filter>头文件\EParserModule</Filter>
+    </ClInclude>
+    <ClInclude Include="common\IDAMenu.h">
+      <Filter>头文件\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\public.h">
+      <Filter>头文件\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\md5.h">
+      <Filter>头文件\common</Filter>
+    </ClInclude>
+    <ClInclude Include="IDAWrapper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="plugin.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="common.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IDASymbol.h">
+      <Filter>源文件\GhidraDecompiler</Filter>
+    </ClInclude>
+    <ClInclude Include="exception.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GhidraDecompiler.h">
+      <Filter>源文件\GhidraDecompiler</Filter>
+    </ClInclude>
+    <ClInclude Include="EObject_Include.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="EKernelLib.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="EStaticArchitecture.h">
+      <Filter>源文件\Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="EFuncInfo.h">
+      <Filter>源文件\Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="IDAArchitecture.h">
+      <Filter>源文件\Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="dotGraph.h">
+      <Filter>源文件\DecompilerCore</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_Label.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_ListBox.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_PicBox.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_PicBtn.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_ProcessBar.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_RadioBox.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_ShapeBox.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_SliderBar.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_Tab.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_Timer.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_VScrollBar.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_window.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\EAppControl.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\EAppControlFactory.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_AnimateBox.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_Button.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_CheckBox.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_ChkListBox.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_ComboBox.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_DrawPanel.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_DropTarget.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_EditBox.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_GroupBox.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="EAppControl\krnl_HScrollBar.h">
+      <Filter>EAppControl</Filter>
+    </ClInclude>
+    <ClInclude Include="DecompilerCore\BasicBlock.h">
+      <Filter>DecompilerCore</Filter>
+    </ClInclude>
+    <ClInclude Include="DecompilerCore\common\Address.h">
+      <Filter>DecompilerCore\common</Filter>
+    </ClInclude>
+    <ClInclude Include="DecompilerCore\FlowInfo.h">
+      <Filter>DecompilerCore</Filter>
+    </ClInclude>
+    <ClInclude Include="SectionManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DecompilerCore\DecompilerWrapper.h">
+      <Filter>DecompilerCore</Filter>
+    </ClInclude>
+    <ClInclude Include="DecompilerCore\common\Op.h">
+      <Filter>DecompilerCore\common</Filter>
+    </ClInclude>
+    <ClInclude Include="DecompilerCore\FuncData.h">
+      <Filter>DecompilerCore</Filter>
+    </ClInclude>
+    <ClInclude Include="DecompilerCore\AddrSpaceManager.h">
+      <Filter>DecompilerCore</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper\CapstoneWrapper.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="ControlInfoWidget.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+</Project>
