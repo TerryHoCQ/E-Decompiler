@@ -189,6 +189,8 @@ enum eSymbolFuncType
 	eFunc_KrnlReadProerty,
 	//设置组件属性
 	eFunc_KrnlWriteProperty,
+	//调用DLL命令
+	eFunc_KrnlDllCmd,
 	//文本相加
 	eFunc_Strcat,
 };
@@ -242,6 +244,11 @@ private:
 	bool loadKrnlInterface(unsigned int lpKrnlEntry);
 	//加载界面资源信息
 	bool loadGUIResource(unsigned int lpGUIStart, unsigned int infoSize);
+	//加载用户导入表
+	bool loadUserImports(unsigned int dwApiCount, unsigned int lpModuleName, unsigned int lpApiName);
+
+	//扫描易语言类虚表
+	bool scanEClassTable();
 	//解析控件基础属性
 	void parseControlBasciProperty(unsigned char* lpControlInfo, EAppControl* outControl);
 	//根据菜单的类型ID来得到名称,0x10001 -> 窗口
@@ -264,12 +271,17 @@ public:
 	//用户结束地址,目前暂时还没有什么好办法获取这个地址,如果有好的想法欢迎提issue
 	unsigned int userCodeEndAddr;
 
+	//导入表,key是索引,value是导入信息
+	std::vector<eSymbol_ImportsApi> importsApiList;
+	//临时导入表
+	std::vector<std::string> tmpImportsApiList;
+
 	//存储所有的控件信息
 	std::vector<EAppControl*> allControlList;
 private:
+
 	//标记函数类型
 	std::map<unsigned int,eSymbolFuncType> eSymbolFuncTypeMap;
-
 	//存储所有的控件信息,内容和allControlList一样
 	std::map<eSymbol_ControlIndex, EAppControl*> allControlMap;
 };
