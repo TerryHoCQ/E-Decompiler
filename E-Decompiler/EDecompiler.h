@@ -6,6 +6,7 @@
 #include "./Module/CTreeFixer.h"
 #include "./Module/ECSigMaker.h"
 #include "./Module/EAppControlXref.h"
+#include "./Module/MicroCodeFixer.h"
 
 enum EArchitectureType
 {
@@ -23,7 +24,6 @@ public:
 	~EDecompiler();
 public:
 	bool idaapi run(size_t) override;
-
 	//初始化易语言反编译引擎
 	bool InitDecompilerEngine();
 private:

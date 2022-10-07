@@ -5,6 +5,7 @@
 #include <diskio.hpp>
 #include <name.hpp>
 #include <typeinf.hpp>
+#include <frame.hpp>
 
 void IDAWrapper::show_wait_box(const char* msg)
 {
@@ -62,7 +63,7 @@ void IDAWrapper::setFuncName(unsigned int addr, const char* funcName, bool bForc
 	}
 	qstring newName;
 	acp_utf8(&newName, funcName);
-	set_name(addr, newName.c_str(), SN_NOWARN);
+	set_name(addr, newName.c_str(), SN_NOWARN | SN_FORCE);
 }
 
 void IDAWrapper::msg(const char* format, ...)
@@ -77,6 +78,9 @@ void IDAWrapper::msg(const char* format, ...)
 bool IDAWrapper::apply_cdecl(unsigned int ea, const char* decl, int flags /*= 0*/)
 {
 	til_t* idati = (til_t*)get_idati();
+	if (!idati) {
+		return false;
+	}
 	return ::apply_cdecl(idati, ea, decl, flags);
 }
 
@@ -91,3 +95,30 @@ std::vector<unsigned int> IDAWrapper::getAllCodeXrefAddr(unsigned int addr)
 	}
 	return retXrefList;
 }
+
+bool IDAWrapper::add_user_stkpnt(unsigned int ea, int delta)
+{
+	return ::add_user_stkpnt(ea,delta);
+}
+
+std::vector<std::string> IDAWrapper::enumerate_files(const char* dir, const char* fname)
+{
+	std::vector<std::string> retFileList;
+	struct MyFileEnumerator :public file_enumerator_t
+	{
+	public:
+		std::vector<std::string>& fileList;
+		MyFileEnumerator(std::vector<std::string>& f) :fileList(f) {};
+		int visit_file(const char* file)
+		{
+			fileList.push_back(file);
+			return 0;
+		}
+	};
+	MyFileEnumerator fileEnumFunc(retFileList);
+	enumerate_files2(0, 0, dir, fname, fileEnumFunc);
+	return retFileList;
+}
+
+
+

@@ -13,6 +13,7 @@
 #include "./Utils/IDAMenu.h"
 #include "./EAppControl/EAppControlFactory.h"
 #include "./EAppControl/EAppControl.h"
+#include "./Module/ECSigScanner.h"
 
 ESymbol::ESymbol()
 {
@@ -117,16 +118,20 @@ bool ESymbol::LoadEStaticSymbol(unsigned int eHeadAddr, EComHead* eHead)
 	if (eHead->lpEWindow != 0 && eHead->dwEWindowSize > 4) {
 		IDAWrapper::show_wait_box(LocalCpToUtf8("解析易语言控件资源").c_str());
 		loadGUIResource(eHead->lpEWindow, eHead->dwEWindowSize);
-		hide_wait_box();
+		IDAWrapper::hide_wait_box();
 	}
 
 	if (eHead->dwApiCount) {
 		IDAWrapper::show_wait_box(LocalCpToUtf8("解析易语言导入表").c_str());
 		loadUserImports(eHead->dwApiCount, eHead->lpModuleName, eHead->lpApiName);
-		hide_wait_box();
+		IDAWrapper::hide_wait_box();
 	}
 	
 	setGuiEventName();
+
+	IDAWrapper::show_wait_box(LocalCpToUtf8("识别模块函数").c_str());
+	//ECSigScanner::Instance().ScanECSigFunction(this);
+	IDAWrapper::hide_wait_box();
 	return true;
 }
 
@@ -250,6 +255,9 @@ bool ESymbol::scanBasicFunction()
 		if (!pFunc) {
 			continue;
 		}
+		if (pFunc->start_ea >= userCodeEndAddr) {
+			continue;
+		}
 		if (eSymbolFuncTypeMap[pFunc->start_ea] != 0x0) {
 			continue;
 		}
@@ -264,13 +272,20 @@ bool ESymbol::scanBasicFunction()
 		}
 		else if (funcName == "连续省略参数") {
 			IDAWrapper::apply_cdecl(pFunc->start_ea, "void __usercall pushDefaultParam(int argCount@<ebx>);");
+			eSymbolFuncTypeMap[pFunc->start_ea] = eFunc_PushDefaultArg;
+			handleFuncPushDefaultArg(pFunc->start_ea);
 		}
 		else if (funcName == "文本比较") {
 			IDAWrapper::apply_cdecl(pFunc->start_ea, "int __cdecl strcmp(char* _Str1,char* _Str2);");
 		}
+		else if (funcName == "计算多维数组下标") {
+			IDAWrapper::apply_cdecl(pFunc->start_ea, "int __usercall addMutilVecIndex@<edx>(int index@<eax>,int dim@<ecx>,DWORD* pBounds);");
+			eSymbolFuncTypeMap[pFunc->start_ea] = eFunc_CalMultiArrayIndex;
+		}
 	}
 	return true;
 }
+
 
 bool ESymbol::loadKrnlInterface(unsigned int lpKrnlEntry)
 {
@@ -336,7 +351,10 @@ bool ESymbol::loadKrnlInterface(unsigned int lpKrnlEntry)
 	eSymbolFuncTypeMap[krnlJmp.Jmp_MWriteProperty] = eFunc_KrnlWriteProperty;
 	eSymbolFuncTypeMap[krnlJmp.Jmp_MCallKrnlLibCmd] = eFunc_KrnlLibFunc;
 	eSymbolFuncTypeMap[krnlJmp.Jmp_MCallDllCmd] = eFunc_KrnlDllCmd;
+	eSymbolFuncTypeMap[krnlJmp.Jmp_MReportError] = eFunc_KrnlReportError;
+	eSymbolFuncTypeMap[krnlJmp.Jmp_MFree] = eFunc_KrnlFreeMem;
 
+	IDAWrapper::apply_cdecl(krnlJmp.Jmp_MOtherHelp, "krnlRet __usercall CallOtherHelp@<eax:edx>(unsigned int index@<eax>,...);");
 	IDAWrapper::apply_cdecl(krnlJmp.Jmp_MCallDllCmd, "krnlRet __usercall CallDllCmd@<eax:edx>(unsigned int index@<eax>,...);");
 	IDAWrapper::apply_cdecl(krnlJmp.Jmp_MCallLibCmd, "krnlRet __usercall CallLibCmd@<eax:edx>(unsigned int libFunc@<ebx>, int argCount, ...);");
 	IDAWrapper::apply_cdecl(krnlJmp.Jmp_MCallKrnlLibCmd, "krnlRet __usercall CallKrnlLibCmd@<eax:edx>(unsigned int libFunc@<ebx>, int argCount, ...);");
@@ -548,12 +566,32 @@ bool ESymbol::loadUserImports(unsigned int dwApiCount, unsigned int lpModuleName
 		if (iIndex != -1) {
 			eImportsApi.libName = eImportsApi.libName.substr(0, iIndex);
 		}
-		eImportsApi.libName = eImportsApi.libName + "." + eImportsApi.apiName;
-		tmpImportsApiList.push_back(LocalCpToUtf8(eImportsApi.libName.c_str()));
+		if (!eImportsApi.libName.empty()) {
+			eImportsApi.apiName = eImportsApi.libName + "." + eImportsApi.apiName;
+		}
+		tmpImportsApiList.push_back(LocalCpToUtf8(eImportsApi.apiName.c_str()));
 		pszLibnameAddr += 4;
 		pszApinameAddr += 4;
 	}
 
+	return true;
+}
+
+bool ESymbol::handleFuncPushDefaultArg(unsigned int callAddr)
+{
+	std::vector<unsigned int> xRefList = IDAWrapper::getAllCodeXrefAddr(callAddr);
+	for (unsigned int n = 0; n < xRefList.size(); ++n) {
+		insn_t tmpIns;
+		if (decode_prev_insn(&tmpIns, xRefList[n]) == BADADDR) {
+			continue;
+		}
+		//mov ebx,xxx
+		if (tmpIns.itype != NN_mov || tmpIns.ops[0].reg != 0x3) {
+			continue;
+		}
+		unsigned int argCount = tmpIns.ops[1].value;
+		IDAWrapper::add_user_stkpnt(xRefList[n] + 5, -(argCount * 4));
+	}
 	return true;
 }
 

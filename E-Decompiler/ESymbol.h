@@ -191,8 +191,16 @@ enum eSymbolFuncType
 	eFunc_KrnlWriteProperty,
 	//调用DLL命令
 	eFunc_KrnlDllCmd,
+	//错误回调
+	eFunc_KrnlReportError,
+	//释放内存
+	eFunc_KrnlFreeMem,
 	//文本相加
 	eFunc_Strcat,
+	//连续省略参数
+	eFunc_PushDefaultArg,
+	//计算多维数组下标
+	eFunc_CalMultiArrayIndex,
 };
 
 struct EAppControl;
@@ -231,8 +239,6 @@ public:
 	eSymbolFuncType GetFuncSymbolType(unsigned int addr);
 	//通过窗口ID和控件ID索引到控件
 	EAppControl* GetEAppControl(unsigned int windowID,unsigned int controID);
-
-
 private:
 	//加载支持库信息
 	bool loadELibInfomation(unsigned int lpLibStartAddr, unsigned int dwLibCount);
@@ -246,7 +252,8 @@ private:
 	bool loadGUIResource(unsigned int lpGUIStart, unsigned int infoSize);
 	//加载用户导入表
 	bool loadUserImports(unsigned int dwApiCount, unsigned int lpModuleName, unsigned int lpApiName);
-
+	//处理连续省略参数
+	bool handleFuncPushDefaultArg(unsigned int callAddr);
 	//扫描易语言类虚表
 	bool scanEClassTable();
 	//解析控件基础属性

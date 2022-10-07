@@ -1,8 +1,15 @@
 #include "ECSigMaker.h"
 #include "../Utils/Strings.h"
+#include "ECSigScanner.h"
+#include <funcs.hpp>
 
 #define ACTION_ECSIGMAKER "EDecompiler::GenerateECSig"
 
+
+ECSigMaker::ECSigMaker(ESymbol& symbol):eSymbol(symbol)
+{
+
+}
 
 void ECSigMaker::RegisterAction(void* owner)
 {
@@ -21,7 +28,14 @@ void ECSigMaker::AttachToPopupMenu(TWidget* view, TPopupMenu* p)
 
 int ECSigMaker::activate(action_activation_ctx_t* ctx)
 {
-	int a = 0;
+	unsigned int curEA = get_screen_ea();
+	func_t* pFunc = get_func(curEA);
+	if (!pFunc) {
+		return 0;
+	}
+	std::string goodMD5 = ECSigScanner::Instance().GetFunctionMD5(pFunc->start_ea,false);
+
+
 	return 0;
 }
 

@@ -21,4 +21,9 @@ namespace IDAWrapper{
 
 	//获取代码交叉引用地址
 	std::vector<unsigned int> getAllCodeXrefAddr(unsigned int addr);
+
+	bool add_user_stkpnt(unsigned int ea, int delta);
+	
+	//枚举指定目录文件
+	std::vector<std::string> enumerate_files(const char* dir, const char* fname);
 }

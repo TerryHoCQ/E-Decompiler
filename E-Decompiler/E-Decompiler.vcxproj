@@ -110,9 +110,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="common\md5.cpp" />
-    <ClCompile Include="common\public.cpp" />
     <ClCompile Include="ControlInfoWidget.cpp" />
+    <ClCompile Include="EAppControl\CIext2_CartoonBox.cpp" />
+    <ClCompile Include="EAppControl\CIext2_IPEditBox.cpp" />
+    <ClCompile Include="EAppControl\CIext2_RichEdit.cpp" />
+    <ClCompile Include="EAppControl\CIext2_SplitterBar.cpp" />
+    <ClCompile Include="EAppControl\CIext2_SuperAnimateBox.cpp" />
+    <ClCompile Include="EAppControl\CIext2_SuperBtn.cpp" />
     <ClCompile Include="EAppControl\EAppControl.cpp" />
     <ClCompile Include="EAppControl\EAppControlFactory.cpp" />
     <ClCompile Include="EAppControl\CKrnl_Button.cpp" />
@@ -137,14 +141,13 @@
     <ClCompile Include="EAppControl\CKrnl_Tab.cpp" />
     <ClCompile Include="EAppControl\CKrnl_Timer.cpp" />
     <ClCompile Include="EAppControl\CKrnl_VScrollBar.cpp" />
-    <ClCompile Include="ECSigParser.cpp" />
     <ClCompile Include="EDecompiler.cpp" />
-    <ClCompile Include="ESigScanner.cpp" />
     <ClCompile Include="ESymbol.cpp" />
-    <ClCompile Include="ImportsParser.cpp" />
     <ClCompile Include="Module\EAppControlXref.cpp" />
     <ClCompile Include="Module\CTreeFixer.cpp" />
     <ClCompile Include="Module\ECSigMaker.cpp" />
+    <ClCompile Include="Module\ECSigScanner.cpp" />
+    <ClCompile Include="Module\MicroCodeFixer.cpp" />
     <ClCompile Include="Module\ShowEventList.cpp" />
     <ClCompile Include="Module\ShowImports.cpp" />
     <ClCompile Include="SectionManager.cpp" />
@@ -152,11 +155,16 @@
     <ClCompile Include="Utils\Common.cpp" />
     <ClCompile Include="Utils\IDAMenu.cpp" />
     <ClCompile Include="Utils\IDAWrapper.cpp" />
+    <ClCompile Include="Utils\md5.cpp" />
     <ClCompile Include="Utils\Strings.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="common\md5.h" />
-    <ClInclude Include="common\public.h" />
+    <ClInclude Include="EAppControl\CIext2_CartoonBox.h" />
+    <ClInclude Include="EAppControl\CIext2_IPEditBox.h" />
+    <ClInclude Include="EAppControl\CIext2_RichEdit.h" />
+    <ClInclude Include="EAppControl\CIext2_SplitterBar.h" />
+    <ClInclude Include="EAppControl\CIext2_SuperAnimateBox.h" />
+    <ClInclude Include="EAppControl\CIext2_SuperBtn.h" />
     <ClInclude Include="EAppControl\EAppControl.h" />
     <ClInclude Include="EAppControl\EAppControlFactory.h" />
     <ClInclude Include="EAppControl\CKrnl_Button.h" />
@@ -181,14 +189,13 @@
     <ClInclude Include="EAppControl\CKrnl_Tab.h" />
     <ClInclude Include="EAppControl\CKrnl_Timer.h" />
     <ClInclude Include="EAppControl\CKrnl_VScrollBar.h" />
-    <ClInclude Include="ECSigParser.h" />
     <ClInclude Include="ELib.h" />
-    <ClInclude Include="EsigScanner.h" />
     <ClInclude Include="ESymbol.h" />
-    <ClInclude Include="ImportsParser.h" />
     <ClInclude Include="Module\EAppControlXref.h" />
     <ClInclude Include="Module\CTreeFixer.h" />
     <ClInclude Include="Module\ECSigMaker.h" />
+    <ClInclude Include="Module\ECSigScanner.h" />
+    <ClInclude Include="Module\MicroCodeFixer.h" />
     <ClInclude Include="Module\ShowEventList.h" />
     <ClInclude Include="Module\ShowImports.h" />
     <ClInclude Include="PropertyDelegate.h" />
@@ -200,6 +207,7 @@
     <ClInclude Include="Utils\Common.h" />
     <ClInclude Include="Utils\IDAMenu.h" />
     <ClInclude Include="Utils\IDAWrapper.h" />
+    <ClInclude Include="Utils\md5.h" />
     <ClInclude Include="Utils\Strings.h" />
   </ItemGroup>
   <ItemGroup>
